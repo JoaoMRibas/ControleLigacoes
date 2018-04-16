@@ -4,6 +4,7 @@
     {
         NaoInformado=0,
         Padrao=1,
-        Admin=2
+        Admin=2,
+        AdmChefe=3
     }
 }

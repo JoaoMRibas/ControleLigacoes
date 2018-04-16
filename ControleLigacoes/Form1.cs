@@ -8,19 +8,11 @@ namespace ControleLigacoes
         public Form1()
         {
             InitializeComponent();
-            Inicializa();
-
-        }
-
-        public void Inicializa()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Debug.WriteLine(System.Guid.NewGuid().ToString());
-                
-            }
             
+
         }
+
+       
     }
 
 }
