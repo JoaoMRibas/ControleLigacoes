@@ -57,34 +57,34 @@ namespace ControleLigacoes.cadastros
         private ConsultaUsuario _consulta;
 
         private void EnviarInfo()
-
         {
-            Usuario instancia = new Usuario();
-
             if (!int.TryParse(Codigo.Text, out int cod))
             {
-                MessageBox.Show("Não foi possível salvar a informação");
+                MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
                 return;
             }
 
+            if (!Enum.TryParse(Tipo.Text, out TipoUsuario tipo) || !Enum.IsDefined(typeof(TipoUsuario), tipo))
+            {
+                MessageBox.Show("Não foi possível salvar a informação o campo informado não é válido");
+                return;
+            }
+
+            if (tipo == TipoUsuario.NaoInformado)
+            {
+                MessageBox.Show("Não foi possível salvar pois 'não informado' não é uma opção válida ");
+            }
+
+            Usuario instancia = new Usuario();
+            instancia.Id = Guid.NewGuid();
             instancia.Codigo = cod;
             instancia.Nome = Nome.Text;
             instancia.Login = Login.Text;
             instancia.Senha = Senha.Text;
-
-
-            if (!Enum.TryParse(Tipo.Text, out TipoUsuario tipo) || !Enum.IsDefined(typeof(TipoUsuario), tipo))
-            {
-                MessageBox.Show("Não foi possível salvar a informação");
-                return;
-            }
-
             instancia.Tipo = tipo;
+
             string json = instancia.Serialize();
             File.AppendAllText(diretorio + "\\usuarios.json",  json + "\r\n");
-            
-
-
 
         }
 
@@ -175,9 +175,21 @@ namespace ControleLigacoes.cadastros
         }
 
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             Consulta.Exibe();
+        }
+
+    
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string[] usuarios = File.ReadAllLines("C:\\Users\\user\\Desktop\\Teste\\usuarios.json");
+
+
+
         }
     }
 }
