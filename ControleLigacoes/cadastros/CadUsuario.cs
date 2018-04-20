@@ -86,6 +86,8 @@ namespace ControleLigacoes.cadastros
             string json = instancia.Serialize();
             File.AppendAllText(diretorio + "\\usuarios.json",  json + "\r\n");
 
+            
+
         }
 
 
@@ -166,7 +168,7 @@ namespace ControleLigacoes.cadastros
                 if (_consulta == null)
                 {
                   _consulta = new ConsultaUsuario();
-                    
+                  _consulta.ItemSelecionado += Consulta_ItemSelecionado; 
                 }
                 return _consulta;
 
@@ -174,8 +176,13 @@ namespace ControleLigacoes.cadastros
             }
         }
 
+       
 
 
+        private void Consulta_ItemSelecionado(Usuario obj)
+        {
+            
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {

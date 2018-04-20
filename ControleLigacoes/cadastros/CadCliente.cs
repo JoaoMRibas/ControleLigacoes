@@ -92,7 +92,6 @@ namespace ControleLigacoes.cadastros
         {
             interfaceUsuario();
             EnviarInfoCliente();
-            
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,14 +20,41 @@ namespace ControleLigacoes.consultas
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = true;
-           
+            dataGridView1.MultiSelect = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeRows = false; 
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.CellDoubleClick += DataGridView1_CellContentDoubleClick;
 
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    
+        private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+            
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            Usuario us = (Usuario) row.Tag;
+            
+            if (ItemSelecionado != null)
+            {
+                ItemSelecionado.Invoke(us);
+            }
             
         }
+
+        public event Action<Usuario> ItemSelecionado;
+
+
+    
 
         public void CarregarDados()
         {
@@ -36,6 +64,7 @@ namespace ControleLigacoes.consultas
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1, usuario.Codigo, usuario.Nome , usuario.Login, usuario.Tipo);
+                row.Tag = usuario;
                 dataGridView1.Rows.Add(row);
             }
 
