@@ -59,8 +59,8 @@ namespace ControleLigacoes.consultas
         public void CarregarDados()
         {
             dataGridView1.Rows.Clear();
-            string[] usuarios = File.ReadAllLines("C:\\Users\\user\\Desktop\\Teste\\usuarios.json");
-            foreach (Usuario usuario in usuarios.Select(us => us.Deserialize<Usuario>()).Where(us=> us != null))
+            string usuarios = File.ReadAllText ("C:\\Users\\user\\Desktop\\Teste\\usuarios.json");
+            foreach (Usuario usuario in usuarios.Deserialize<List<Usuario>>())
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1, usuario.Codigo, usuario.Nome , usuario.Login, usuario.Tipo);

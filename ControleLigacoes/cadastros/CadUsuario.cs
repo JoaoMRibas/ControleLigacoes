@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using ControleLigacoes.consultas;
@@ -56,7 +57,7 @@ namespace ControleLigacoes.cadastros
         public TextWriter arquivo;
         private ConsultaUsuario _consulta;
 
-        private void EnviarInfo()
+        public void EnviarInfo()
         {
             if (!int.TryParse(Codigo.Text, out int cod))
             {
@@ -83,10 +84,24 @@ namespace ControleLigacoes.cadastros
             instancia.Senha = Senha.Text;
             instancia.Tipo = tipo;
 
-            string json = instancia.Serialize();
-            File.AppendAllText(diretorio + "\\usuarios.json",  json + "\r\n");
+            List<Usuario> usuarios;
+            string filePath = diretorio + "\\usuarios.json";
+            if (File.Exists(filePath))
+            {
+                string txt = File.ReadAllText(diretorio + "\\usuarios.json");
+                usuarios = txt.Deserialize<List<Usuario>>();
+            }
+            else
+            {
+                usuarios = new List<Usuario>();
+            }
 
-            
+            usuarios.Add(instancia);
+            usuarios = usuarios.Where(u => { return instancia.Id == u.Id; }).ToList();
+          
+            string usuariosTxt = usuarios.Serialize();
+            File.WriteAllText(filePath, usuariosTxt); 
+
 
         }
 
@@ -179,7 +194,7 @@ namespace ControleLigacoes.cadastros
        
 
 
-        private void Consulta_ItemSelecionado(Usuario obj)
+        public void Consulta_ItemSelecionado(Usuario obj)
         {
             
         }
@@ -188,16 +203,7 @@ namespace ControleLigacoes.cadastros
         {
             Consulta.Exibe();
         }
-
-    
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string[] usuarios = File.ReadAllLines("C:\\Users\\user\\Desktop\\Teste\\usuarios.json");
-
-
-
-        }
+  
     }
 }
 
