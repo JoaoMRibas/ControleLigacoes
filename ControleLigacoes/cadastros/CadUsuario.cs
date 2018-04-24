@@ -96,14 +96,18 @@ namespace ControleLigacoes.cadastros
                 usuarios = new List<Usuario>();
             }
 
+            
+            usuarios = usuarios.Where(u =>{return instancia.Id != u.Id; }).ToList();
             usuarios.Add(instancia);
-            usuarios = usuarios.Where(u => { return instancia.Id == u.Id; }).ToList();
-          
+            
+
             string usuariosTxt = usuarios.Serialize();
             File.WriteAllText(filePath, usuariosTxt); 
-
+            
 
         }
+
+   
 
 
         public void criarArquivo()
@@ -174,6 +178,7 @@ namespace ControleLigacoes.cadastros
             interfaceUsuario();
             //criarArquivo();
             EnviarInfo();
+            LimparCampos();
         }
 
         private ConsultaUsuario Consulta
@@ -196,7 +201,8 @@ namespace ControleLigacoes.cadastros
 
         public void Consulta_ItemSelecionado(Usuario obj)
         {
-            
+            CadUsuario link2 = new CadUsuario();
+            link2.ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)
