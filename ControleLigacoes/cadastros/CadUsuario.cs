@@ -27,6 +27,11 @@ namespace ControleLigacoes.cadastros
 
             foreach (TipoUsuario novotipo in Enum.GetValues(typeof(TipoUsuario)).OfType<TipoUsuario>())
             {
+                if (TipoUsuario.NaoInformado.Equals(novotipo))
+                {
+                    continue;
+                }
+
                 Tipo.Items.Add(novotipo);
             }
         }
@@ -44,14 +49,15 @@ namespace ControleLigacoes.cadastros
             Nome.Clear();
             Login.Clear();
             Senha.Clear();
-
+            Tipo.SelectedItem = null;
+            UsuarioAtual = null;
 
         }
 
         public FolderBrowserDialog folderDialog = new FolderBrowserDialog();
 
         //Irá armazenar o diretório recebido pelo folderDialog
-        public string diretorio;
+        public string diretorio = "C:\\Users\\user\\Desktop\\Teste";
 
         //Arquivo de escrita 
         public TextWriter arquivo;
@@ -71,18 +77,39 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-            if (tipo == TipoUsuario.NaoInformado)
+            if (TipoUsuario.NaoInformado.Equals(tipo))
             {
                 MessageBox.Show("Não foi possível salvar pois 'não informado' não é uma opção válida ");
+                return;
             }
 
+
+
             Usuario instancia = new Usuario();
-            instancia.Id = Guid.NewGuid();
+
+            //se  for o 1 caso então cria um Id novo
+            //se for o 2 caso então mantém o mesmo Id
+            if (UsuarioAtual == null)
+            {
+                instancia.Id = Guid.NewGuid();
+            }
+
+            if (UsuarioAtual != null)
+            {
+                instancia.Id = UsuarioAtual.Id;
+
+            }
+
+
             instancia.Codigo = cod;
             instancia.Nome = Nome.Text;
             instancia.Login = Login.Text;
             instancia.Senha = Senha.Text;
             instancia.Tipo = tipo;
+
+
+
+
 
             List<Usuario> usuarios;
             string filePath = diretorio + "\\usuarios.json";
@@ -96,18 +123,18 @@ namespace ControleLigacoes.cadastros
                 usuarios = new List<Usuario>();
             }
 
-            
-            usuarios = usuarios.Where(u =>{return instancia.Id != u.Id; }).ToList();
+
+
+            usuarios = usuarios.Where(u => { return instancia.Id != u.Id; }).ToList();
             usuarios.Add(instancia);
-            
+
 
             string usuariosTxt = usuarios.Serialize();
-            File.WriteAllText(filePath, usuariosTxt); 
-            
+            File.WriteAllText(filePath, usuariosTxt);
+
 
         }
 
-   
 
 
         public void criarArquivo()
@@ -175,7 +202,7 @@ namespace ControleLigacoes.cadastros
 
         private void button2_Click(object sender, EventArgs e)
         {
-            interfaceUsuario();
+            //interfaceUsuario();
             //criarArquivo();
             EnviarInfo();
             LimparCampos();
@@ -187,30 +214,60 @@ namespace ControleLigacoes.cadastros
             {
                 if (_consulta == null)
                 {
-                  _consulta = new ConsultaUsuario();
-                  _consulta.ItemSelecionado += Consulta_ItemSelecionado; 
+                    _consulta = new ConsultaUsuario();
+                    _consulta.ItemSelecionado += Consulta_ItemSelecionado;
                 }
+
                 return _consulta;
 
-                
+
             }
         }
 
-       
+        private Usuario UsuarioAtual { get; set; }
+
 
 
         public void Consulta_ItemSelecionado(Usuario obj)
         {
-            CadUsuario link2 = new CadUsuario();
-            link2.ShowDialog();
+            UsuarioAtual = obj;
+            Codigo.Text = obj.Codigo.ToString();
+            Nome.Text = obj.Nome;
+            Login.Text = obj.Login;
+            Senha.Text = obj.Senha;
+            Tipo.SelectedItem = obj.Tipo;
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             Consulta.Exibe();
         }
-  
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (UsuarioAtual != null)
+            {
+                List<Usuario> usuarios;
+                string filePath = diretorio + "\\usuarios.json";
+                if (File.Exists(filePath))
+                {
+                    string txt = File.ReadAllText(diretorio + "\\usuarios.json");
+                    usuarios = txt.Deserialize<List<Usuario>>();
+                }
+                else
+                {
+                    usuarios = new List<Usuario>();
+                }
+
+
+
+
+                usuarios = usuarios.Where(u => { return UsuarioAtual.Id != u.Id;}).ToList();
+                string usuariosTxt = usuarios.Serialize();
+                File.WriteAllText(filePath, usuariosTxt);
+                LimparCampos();
+            }
+        }
     }
 }
-
-

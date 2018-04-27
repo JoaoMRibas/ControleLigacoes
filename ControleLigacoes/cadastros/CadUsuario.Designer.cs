@@ -161,9 +161,9 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(84, 34);
             this.button5.TabIndex = 12;
-            this.button5.Text = "Alterar registros de usuário";
+            this.button5.Text = "Apagar Registro";
             this.button5.UseVisualStyleBackColor = true;
-
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // CadUsuario
             // 

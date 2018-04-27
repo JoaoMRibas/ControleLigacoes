@@ -47,13 +47,14 @@ namespace ControleLigacoes.consultas
             if (ItemSelecionado != null)
             {
                 ItemSelecionado.Invoke(us);
+                Close();
             }
             
         }
 
         public event Action<Usuario> ItemSelecionado;
 
-
+        
     
 
         public void CarregarDados()
@@ -63,7 +64,7 @@ namespace ControleLigacoes.consultas
             foreach (Usuario usuario in usuarios.Deserialize<List<Usuario>>())
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dataGridView1, usuario.Codigo, usuario.Nome , usuario.Login, usuario.Tipo);
+                row.CreateCells(dataGridView1, usuario.Codigo, usuario.Id, usuario.Nome , usuario.Login, usuario.Tipo);
                 row.Tag = usuario;
                 dataGridView1.Rows.Add(row);
             }
