@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
+using Maoli;
 
 namespace ControleLigacoes.cadastros
 {
@@ -27,6 +29,7 @@ namespace ControleLigacoes.cadastros
             Cnpj.Clear();
             Telefone.Clear();
             Email.Clear();
+            ClienteAtual = null;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,32 +40,85 @@ namespace ControleLigacoes.cadastros
         public FolderBrowserDialog folderDialog = new FolderBrowserDialog();
 
         //Irá armazenar o diretório recebido pelo folderDialog
-        public string diretorio;
+        public string diretorio = "C:\\Users\\user\\Desktop\\Teste";
 
         //Arquivo de escrita 
         public TextWriter arquivo;
+        private Consulta<Cliente> _consulta;
 
 
         private void EnviarInfoCliente()
         {
-
+            
             if (!int.TryParse(Codigo.Text, out int cod))
             {
                 MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
                 return;
             }
 
+            string cnpj = Cnpj.Text;
+
+            if (cnpj.Length != 14)
+            {
+                MessageBox.Show("Não foi possível salvar a informação, pois o campo Cnpj deve conter 14 dígitos");
+                return;
+            }
+
+            if (cnpj.Any(c => !char.IsDigit(c)))
+            {
+                MessageBox.Show("Não foi possível salvar a informação, pois o campo Cnpj não permite letras");
+                return;
+            }
+
+            if (!Maoli.Cnpj.Validate(cnpj))
+            {
+                MessageBox.Show("Não foi possível salvar a informação, pois não é um Cnpj válido");
+                return;
+            }
+
+
+
+
+
             Cliente instancia = new Cliente();
-            instancia.Id = Guid.NewGuid();
+            if (ClienteAtual == null)
+            {
+                instancia.Id = Guid.NewGuid();
+            }
+
+            if (ClienteAtual != null)
+            {
+                instancia.Id = ClienteAtual.Id;
+            }
+            
             instancia.Codigo = cod;
             instancia.RazaoSocial = RazaoSocial.Text;
             instancia.NomeFantasia = NomeFantasia.Text;
-            instancia.Cnpj = Cnpj.Text;
+            instancia.Cnpj = cnpj;
             instancia.Email = Email.Text;
             instancia.Telefone = Telefone.Text;
 
-            string json = instancia.Serialize();
-            File.AppendAllText(diretorio + "\\clientes.json", json + "\r\n");
+            List<Cliente> clientes;
+            string filePath = diretorio + "\\clientes.json";
+            if (File.Exists(filePath))
+            {
+                string txt = File.ReadAllText(diretorio + "\\clientes.json");
+                clientes = txt.Deserialize<List<Cliente>>();
+            }
+            else
+            {
+                clientes = new List<Cliente>();
+            }
+
+
+
+            clientes = clientes.Where(u => { return instancia.Id != u.Id; }).ToList();
+            clientes.Add(instancia);
+
+
+            string clientesTxt = clientes.Serialize();
+            File.WriteAllText(filePath, clientesTxt);
+            Limpar();
 
         }
 
@@ -88,10 +144,71 @@ namespace ControleLigacoes.cadastros
 
         }
 
+        private Consulta<Cliente> Consultaa
+        {
+            get
+            {
+                if (_consulta == null)
+                {
+                    _consulta = new Consulta<Cliente>();
+                    _consulta.ItemSelecionado += Consulta_ItemSelecionado;
+                }
+
+                return _consulta;
+
+
+            }
+        }
+
+        private Cliente ClienteAtual { get; set; }
+
+
+
+        public void Consulta_ItemSelecionado(Cliente obj)
+        {
+            ClienteAtual = obj;
+            Codigo.Text = obj.Codigo.ToString();
+            NomeFantasia.Text = obj.NomeFantasia;
+            RazaoSocial.Text = obj.RazaoSocial;
+            Cnpj.Text = obj.Cnpj;
+            Telefone.Text = obj.Telefone;
+            Email.Text = obj.Email;
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            interfaceUsuario();
+           
             EnviarInfoCliente();
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Consultaa.Exibe();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (ClienteAtual != null)
+            {
+                List<Cliente> clientes;
+                string filePath = diretorio + "\\Clientes.json";
+                if (File.Exists(filePath))
+                {
+                    string txt = File.ReadAllText(diretorio + "\\clientes.json");
+                    clientes = txt.Deserialize<List<Cliente>>();
+                }
+                else
+                {
+                    clientes = new List<Cliente>();
+                }
+
+                clientes = clientes.Where(u => { return ClienteAtual.Id != u.Id; }).ToList();
+                string clienteTxt = clientes.Serialize();
+                File.WriteAllText(filePath, clienteTxt);
+                Limpar();
+            }
         }
     }
 }

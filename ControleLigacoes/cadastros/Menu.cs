@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControleLigacoes.consultas;
+using ControleLigacoes.dados;
 
 namespace ControleLigacoes.cadastros
 {
@@ -15,6 +17,7 @@ namespace ControleLigacoes.cadastros
         public Menu()
         {
             InitializeComponent();
+           
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -27,6 +30,14 @@ namespace ControleLigacoes.cadastros
         {
             CadUsuario link2 = new CadUsuario();
             link2.ShowDialog();
+        }
+
+        
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Consulta.Exibe();
         }
     }
 }

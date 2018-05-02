@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Maoli, Version=0.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Maoli.0.2.2\lib\net40\Maoli.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -54,6 +57,12 @@
     <Compile Include="cadastros\CadCliente.Designer.cs">
       <DependentUpon>CadCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadastros\CadLigacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadastros\CadLigacao.Designer.cs">
+      <DependentUpon>CadLigacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="cadastros\CadUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +74,12 @@
     </Compile>
     <Compile Include="cadastros\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="consultas\Consulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="consultas\Consulta.Designer.cs">
+      <DependentUpon>Consulta.cs</DependentUpon>
     </Compile>
     <Compile Include="consultas\ConsultaUsuario.cs">
       <SubType>Form</SubType>
@@ -90,11 +105,17 @@
     <EmbeddedResource Include="cadastros\CadCliente.resx">
       <DependentUpon>CadCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="cadastros\CadLigacao.resx">
+      <DependentUpon>CadLigacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cadastros\CadUsuario.resx">
       <DependentUpon>CadUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cadastros\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="consultas\Consulta.resx">
+      <DependentUpon>Consulta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="consultas\ConsultaUsuario.resx">
       <DependentUpon>ConsultaUsuario.cs</DependentUpon>

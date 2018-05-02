@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ControleLigacoes.cadastros;
+using Menu = ControleLigacoes.cadastros.Menu;
 
 namespace ControleLigacoes
 {
@@ -14,7 +15,7 @@ namespace ControleLigacoes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CadUsuario());
+            Application.Run(new Menu());
         }
     }
 }

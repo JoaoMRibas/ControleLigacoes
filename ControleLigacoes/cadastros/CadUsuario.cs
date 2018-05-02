@@ -61,7 +61,7 @@ namespace ControleLigacoes.cadastros
 
         //Arquivo de escrita 
         public TextWriter arquivo;
-        private ConsultaUsuario _consulta;
+        private Consulta<Usuario> _consulta;
 
         public void EnviarInfo()
         {
@@ -127,11 +127,9 @@ namespace ControleLigacoes.cadastros
 
             usuarios = usuarios.Where(u => { return instancia.Id != u.Id; }).ToList();
             usuarios.Add(instancia);
-
-
             string usuariosTxt = usuarios.Serialize();
             File.WriteAllText(filePath, usuariosTxt);
-
+            LimparCampos();
 
         }
 
@@ -205,16 +203,16 @@ namespace ControleLigacoes.cadastros
             //interfaceUsuario();
             //criarArquivo();
             EnviarInfo();
-            LimparCampos();
+            
         }
 
-        private ConsultaUsuario Consulta
+        private Consulta<Usuario> Consultaa
         {
             get
             {
                 if (_consulta == null)
                 {
-                    _consulta = new ConsultaUsuario();
+                    _consulta = new Consulta<Usuario>();
                     _consulta.ItemSelecionado += Consulta_ItemSelecionado;
                 }
 
@@ -241,7 +239,7 @@ namespace ControleLigacoes.cadastros
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Consulta.Exibe();
+            Consultaa.Exibe();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -259,9 +257,6 @@ namespace ControleLigacoes.cadastros
                 {
                     usuarios = new List<Usuario>();
                 }
-
-
-
 
                 usuarios = usuarios.Where(u => { return UsuarioAtual.Id != u.Id;}).ToList();
                 string usuariosTxt = usuarios.Serialize();
