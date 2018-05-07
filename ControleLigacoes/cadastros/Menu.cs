@@ -20,24 +20,22 @@ namespace ControleLigacoes.cadastros
            
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void BtCadCliente_Click(object sender, EventArgs e)
         {
             CadCliente link1 = new CadCliente();
             link1.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtCadUsuario_Click(object sender, EventArgs e)
         {
             CadUsuario link2 = new CadUsuario();
             link2.ShowDialog();
         }
 
-        
-
-
-        private void button3_Click(object sender, EventArgs e)
+        private void BtCadLigacao_Click(object sender, EventArgs e)
         {
-            //Consulta.Exibe();
+            CadLigacao link3 = new CadLigacao();
+            link3.ShowDialog();
         }
     }
 }

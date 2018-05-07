@@ -38,12 +38,18 @@
             this.Cliente = new System.Windows.Forms.TextBox();
             this.Usuario = new System.Windows.Forms.TextBox();
             this.Observacoes = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.BtLimpar = new System.Windows.Forms.Button();
+            this.BtSalvar = new System.Windows.Forms.Button();
+            this.BtPesquisar = new System.Windows.Forms.Button();
+            this.BtExcluir = new System.Windows.Forms.Button();
+            this.BtCliente = new System.Windows.Forms.Button();
+            this.BtUsuario = new System.Windows.Forms.Button();
+            this.DtGvStatus = new System.Windows.Forms.DataGridView();
+            this.Ligacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsuarioGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataeHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -109,6 +115,7 @@
             // 
             this.Cliente.Location = new System.Drawing.Point(83, 79);
             this.Cliente.Name = "Cliente";
+            this.Cliente.ReadOnly = true;
             this.Cliente.Size = new System.Drawing.Size(100, 20);
             this.Cliente.TabIndex = 7;
             // 
@@ -116,6 +123,7 @@
             // 
             this.Usuario.Location = new System.Drawing.Point(83, 109);
             this.Usuario.Name = "Usuario";
+            this.Usuario.ReadOnly = true;
             this.Usuario.Size = new System.Drawing.Size(100, 20);
             this.Usuario.TabIndex = 8;
             // 
@@ -126,72 +134,111 @@
             this.Observacoes.Size = new System.Drawing.Size(100, 20);
             this.Observacoes.TabIndex = 9;
             // 
-            // button1
+            // BtLimpar
             // 
-            this.button1.Location = new System.Drawing.Point(12, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Limpar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtLimpar.Location = new System.Drawing.Point(12, 173);
+            this.BtLimpar.Name = "BtLimpar";
+            this.BtLimpar.Size = new System.Drawing.Size(88, 23);
+            this.BtLimpar.TabIndex = 10;
+            this.BtLimpar.Text = "Limpar";
+            this.BtLimpar.UseVisualStyleBackColor = true;
+            this.BtLimpar.Click += new System.EventHandler(this.BtLimpar_Click);
             // 
-            // button2
+            // BtSalvar
             // 
-            this.button2.Location = new System.Drawing.Point(108, 170);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Salvar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtSalvar.Location = new System.Drawing.Point(131, 173);
+            this.BtSalvar.Name = "BtSalvar";
+            this.BtSalvar.Size = new System.Drawing.Size(88, 23);
+            this.BtSalvar.TabIndex = 11;
+            this.BtSalvar.Text = "Salvar";
+            this.BtSalvar.UseVisualStyleBackColor = true;
+            this.BtSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
             // 
-            // button3
+            // BtPesquisar
             // 
-            this.button3.Location = new System.Drawing.Point(12, 199);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 34);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Visualizar Registros";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BtPesquisar.Location = new System.Drawing.Point(12, 215);
+            this.BtPesquisar.Name = "BtPesquisar";
+            this.BtPesquisar.Size = new System.Drawing.Size(88, 22);
+            this.BtPesquisar.TabIndex = 12;
+            this.BtPesquisar.Text = "Pesquisar";
+            this.BtPesquisar.UseVisualStyleBackColor = true;
+            this.BtPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
-            // button4
+            // BtExcluir
             // 
-            this.button4.Location = new System.Drawing.Point(108, 199);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 34);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "Apagar Registros";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BtExcluir.Location = new System.Drawing.Point(131, 215);
+            this.BtExcluir.Name = "BtExcluir";
+            this.BtExcluir.Size = new System.Drawing.Size(88, 22);
+            this.BtExcluir.TabIndex = 13;
+            this.BtExcluir.Text = "Excluir ";
+            this.BtExcluir.UseVisualStyleBackColor = true;
+            this.BtExcluir.Click += new System.EventHandler(this.BtExcluir_Click);
             // 
-            // button5
+            // BtCliente
             // 
-            this.button5.Location = new System.Drawing.Point(189, 79);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(30, 20);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "PC";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtCliente.Location = new System.Drawing.Point(189, 79);
+            this.BtCliente.Name = "BtCliente";
+            this.BtCliente.Size = new System.Drawing.Size(30, 20);
+            this.BtCliente.TabIndex = 14;
+            this.BtCliente.Text = "PC";
+            this.BtCliente.UseVisualStyleBackColor = true;
+            this.BtCliente.Click += new System.EventHandler(this.BtCliente_Click);
             // 
-            // button6
+            // BtUsuario
             // 
-            this.button6.Location = new System.Drawing.Point(189, 108);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(30, 20);
-            this.button6.TabIndex = 15;
-            this.button6.Text = "PU";
-            this.button6.UseVisualStyleBackColor = true;
+            this.BtUsuario.Location = new System.Drawing.Point(189, 108);
+            this.BtUsuario.Name = "BtUsuario";
+            this.BtUsuario.Size = new System.Drawing.Size(30, 20);
+            this.BtUsuario.TabIndex = 15;
+            this.BtUsuario.Text = "PU";
+            this.BtUsuario.UseVisualStyleBackColor = true;
+            this.BtUsuario.Click += new System.EventHandler(this.BtUsuario_Click);
+            // 
+            // DtGvStatus
+            // 
+            this.DtGvStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DtGvStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Ligacao,
+            this.UsuarioGrid,
+            this.DataeHora,
+            this.Status});
+            this.DtGvStatus.Location = new System.Drawing.Point(246, 12);
+            this.DtGvStatus.Name = "DtGvStatus";
+            this.DtGvStatus.Size = new System.Drawing.Size(452, 333);
+            this.DtGvStatus.TabIndex = 16;
+            // 
+            // Ligacao
+            // 
+            this.Ligacao.HeaderText = "Ligação";
+            this.Ligacao.Name = "Ligacao";
+            // 
+            // UsuarioGrid
+            // 
+            this.UsuarioGrid.HeaderText = "Usuário";
+            this.UsuarioGrid.Name = "UsuarioGrid";
+            // 
+            // DataeHora
+            // 
+            this.DataeHora.HeaderText = "Data e Hora";
+            this.DataeHora.Name = "DataeHora";
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
             // 
             // CadLigacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(220, 253);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(754, 357);
+            this.Controls.Add(this.DtGvStatus);
+            this.Controls.Add(this.BtUsuario);
+            this.Controls.Add(this.BtCliente);
+            this.Controls.Add(this.BtExcluir);
+            this.Controls.Add(this.BtPesquisar);
+            this.Controls.Add(this.BtSalvar);
+            this.Controls.Add(this.BtLimpar);
             this.Controls.Add(this.Observacoes);
             this.Controls.Add(this.Usuario);
             this.Controls.Add(this.Cliente);
@@ -204,6 +251,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CadLigacao";
             this.Text = "CadLigacao";
+            ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,11 +269,16 @@
         private System.Windows.Forms.TextBox Cliente;
         private System.Windows.Forms.TextBox Usuario;
         private System.Windows.Forms.TextBox Observacoes;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button BtLimpar;
+        private System.Windows.Forms.Button BtSalvar;
+        private System.Windows.Forms.Button BtPesquisar;
+        private System.Windows.Forms.Button BtExcluir;
+        private System.Windows.Forms.Button BtCliente;
+        private System.Windows.Forms.Button BtUsuario;
+        private System.Windows.Forms.DataGridView DtGvStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ligacao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UsuarioGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataeHora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }

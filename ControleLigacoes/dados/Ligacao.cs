@@ -5,7 +5,7 @@ namespace ControleLigacoes.dados
     public class Ligacao
     {
         public Guid Id { get; set; }
-        public string Codigo { get; set; }
+        public int Codigo { get; set; }
         public DateTime DataHora { get; set; }
         public Cliente  Cliente { get; set; }
         public Usuario Usuario { get; set; }
