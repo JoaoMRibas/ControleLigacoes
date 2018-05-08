@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using ControleLigacoes.dados;
+using Newtonsoft.Json;
 
 namespace ControleLigacoes
 {
@@ -20,6 +24,30 @@ namespace ControleLigacoes
         public static T Deserialize<T>(this string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        #endregion
+
+        #region Guid
+
+        public static bool IsEmpty(this Guid guid)
+        {
+            return Guid.Empty.Equals(guid);
+        }
+
+        #endregion
+
+        #region Carregar Dados
+
+        public static List<T> CarregarDados<T>()
+        {
+            return CarregarDados<T>(FileNames.GetFileName<T>());
+        }
+
+        public static List<T> CarregarDados<T>(this string fileName)
+        {
+            string dados = File.ReadAllText($"C:\\Users\\user\\Desktop\\Teste\\{fileName}");
+            return dados.Deserialize<List<T>>();
         }
 
         #endregion

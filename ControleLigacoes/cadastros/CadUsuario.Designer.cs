@@ -205,6 +205,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox Tipo;
+        private System.Windows.Forms.ComboBox OpcaoStatus;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
     }

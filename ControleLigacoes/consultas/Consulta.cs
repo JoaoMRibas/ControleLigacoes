@@ -25,7 +25,6 @@ namespace ControleLigacoes.consultas
 
             if (typeof(T) == typeof(Cliente))
             {
-                FileName = "clientes.json";
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "CodCli"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn{HeaderText = "Razão Social",Name = "RazaoSocial"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Nome Fantasia",Name = "NomeFantasia"});
@@ -50,7 +49,6 @@ namespace ControleLigacoes.consultas
             }
             else if (typeof(T) == typeof(Usuario))
             {
-                FileName = "usuarios.json";
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "Codigo"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Nome", Name = "Nome"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Login", Name = "Login"});
@@ -77,7 +75,6 @@ namespace ControleLigacoes.consultas
 
             if (typeof(T) == typeof(Ligacao))
             {
-                FileName = "ligacoes.json";
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "Codigo"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Data e Hora", Name = "DataHora"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Cliente", Name = "Cliente"});
@@ -98,7 +95,6 @@ namespace ControleLigacoes.consultas
         }
 
         private Func<T,object[]> CreateCells { get; set; }
-        private string FileName { get; set; }
 
         private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -128,14 +124,14 @@ namespace ControleLigacoes.consultas
         public void CarregarDados()
         {
             dataGridView1.Rows.Clear();
-            string dados = File.ReadAllText($"C:\\Users\\user\\Desktop\\Teste\\{FileName}");
-            foreach (T d in dados.Deserialize<List<T>>())
+            foreach (T d in Extensions.CarregarDados<T>())
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1, CreateCells(d));
                 row.Tag = d;
                 dataGridView1.Rows.Add(row);
             }
+
         }
 
 

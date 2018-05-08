@@ -1,6 +1,6 @@
 ﻿namespace ControleLigacoes.cadastros
 {
-    partial class CadLigacao
+    partial class BtStatus
     {
         /// <summary>
         /// Required designer variable.
@@ -49,6 +49,7 @@
             this.UsuarioGrid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataeHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,7 +137,7 @@
             // 
             // BtLimpar
             // 
-            this.BtLimpar.Location = new System.Drawing.Point(12, 173);
+            this.BtLimpar.Location = new System.Drawing.Point(12, 197);
             this.BtLimpar.Name = "BtLimpar";
             this.BtLimpar.Size = new System.Drawing.Size(88, 23);
             this.BtLimpar.TabIndex = 10;
@@ -146,7 +147,7 @@
             // 
             // BtSalvar
             // 
-            this.BtSalvar.Location = new System.Drawing.Point(131, 173);
+            this.BtSalvar.Location = new System.Drawing.Point(131, 197);
             this.BtSalvar.Name = "BtSalvar";
             this.BtSalvar.Size = new System.Drawing.Size(88, 23);
             this.BtSalvar.TabIndex = 11;
@@ -156,7 +157,7 @@
             // 
             // BtPesquisar
             // 
-            this.BtPesquisar.Location = new System.Drawing.Point(12, 215);
+            this.BtPesquisar.Location = new System.Drawing.Point(12, 242);
             this.BtPesquisar.Name = "BtPesquisar";
             this.BtPesquisar.Size = new System.Drawing.Size(88, 22);
             this.BtPesquisar.TabIndex = 12;
@@ -166,7 +167,7 @@
             // 
             // BtExcluir
             // 
-            this.BtExcluir.Location = new System.Drawing.Point(131, 215);
+            this.BtExcluir.Location = new System.Drawing.Point(131, 242);
             this.BtExcluir.Name = "BtExcluir";
             this.BtExcluir.Size = new System.Drawing.Size(88, 22);
             this.BtExcluir.TabIndex = 13;
@@ -227,11 +228,22 @@
             this.Status.HeaderText = "Status";
             this.Status.Name = "Status";
             // 
-            // CadLigacao
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(131, 161);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Add Status";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BtStatus_Click);
+            // 
+            // BtStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 357);
+            this.ClientSize = new System.Drawing.Size(709, 352);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.DtGvStatus);
             this.Controls.Add(this.BtUsuario);
             this.Controls.Add(this.BtCliente);
@@ -249,7 +261,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "CadLigacao";
+            this.Name = "BtStatus";
             this.Text = "CadLigacao";
             ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).EndInit();
             this.ResumeLayout(false);
@@ -280,5 +292,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UsuarioGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataeHora;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.Button button1;
     }
 }

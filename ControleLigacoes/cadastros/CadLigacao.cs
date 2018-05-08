@@ -13,10 +13,10 @@ using ControleLigacoes.dados;
 
 namespace ControleLigacoes.cadastros
 {
-    public partial class CadLigacao : Form
+    public partial class BtStatus : Form
     {
 
-        public CadLigacao()
+        public BtStatus()
         {
             InitializeComponent();
             DtGvStatus.AutoGenerateColumns = true;
@@ -66,6 +66,7 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
+          
             Ligacao instancia = new Ligacao();
 
             //se  for o 1 caso então cria um Id novo
@@ -81,12 +82,14 @@ namespace ControleLigacoes.cadastros
 
             }
 
-
+            
             instancia.Codigo = cod;
             instancia.Usuario = Usuario.Tag as Usuario;
             instancia.Cliente = Cliente.Tag as Cliente;
             instancia.DataHora = Data;
             instancia.Observacoes = Observacoes.Text;
+             
+
 
 
 
@@ -182,12 +185,10 @@ namespace ControleLigacoes.cadastros
             Cliente.Text = obj.Cliente.RazaoSocial;
             Cliente.Tag = obj.Cliente;
             Usuario.Text = obj.Usuario.Nome;
-            Usuario.Tag = obj.Usuario;
+            Usuario.Tag = obj.Usuario;            
+            Observacoes.Text = obj.Observacoes;
+            ExibeStatus();
             
-Observacoes.Text = obj.Observacoes;
-            DtGvStatus.Text = obj.Codigo.ToString();
-            DtGvStatus.Text = obj.Usuario.Nome;
-            DtGvStatus.Text = obj.DataHora.ToString();
         }
 
 
@@ -247,7 +248,7 @@ Observacoes.Text = obj.Observacoes;
             foreach (Ligacao ligacao in ligacoes.Deserialize<List<Ligacao>>())
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DtGvStatus, ligacao.Codigo, ligacao.Usuario.Nome, ligacao.DataHora);
+                row.CreateCells(DtGvStatus, LigacaoAtual.Codigo, LigacaoAtual.Usuario.Nome, LigacaoAtual.DataHora);
                 row.Tag = ligacao;
                 DtGvStatus.Rows.Add(row);
             }
@@ -260,7 +261,11 @@ Observacoes.Text = obj.Observacoes;
             CarregarDadosStatus();
         }
 
-     
+        private void BtStatus_Click(object sender, EventArgs e)
+        {
+            CadStatus status = new CadStatus();
+            status.ShowDialog();
+        }
     }
 }
 

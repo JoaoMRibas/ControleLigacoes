@@ -34,7 +34,7 @@ namespace ControleLigacoes.cadastros
 
         private void BtCadLigacao_Click(object sender, EventArgs e)
         {
-            CadLigacao link3 = new CadLigacao();
+            BtStatus link3 = new BtStatus();
             link3.ShowDialog();
         }
     }

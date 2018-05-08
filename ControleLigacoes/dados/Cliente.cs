@@ -11,7 +11,6 @@ namespace ControleLigacoes.dados
         public string Cnpj { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-
     }
 
 

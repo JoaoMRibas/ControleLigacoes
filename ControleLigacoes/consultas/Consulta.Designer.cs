@@ -1,4 +1,6 @@
-﻿namespace ControleLigacoes.consultas
+﻿using ControleLigacoes.dados;
+
+namespace ControleLigacoes.consultas
 {
     partial class Consulta<T>
     {

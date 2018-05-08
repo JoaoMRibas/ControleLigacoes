@@ -63,6 +63,12 @@
     <Compile Include="cadastros\CadLigacao.Designer.cs">
       <DependentUpon>CadLigacao.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadastros\CadStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadastros\CadStatus.Designer.cs">
+      <DependentUpon>CadStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="cadastros\CadUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,8 @@
     <Compile Include="consultas\ConsultaUsuario.Designer.cs">
       <DependentUpon>ConsultaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="dados\FileNames.cs" />
+    <Compile Include="dados\HistoricoStatus.cs" />
     <Compile Include="dados\Ligacao.cs" />
     <Compile Include="dados\OpcoesStatus.cs" />
     <Compile Include="dados\Status.cs" />
@@ -107,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="cadastros\CadLigacao.resx">
       <DependentUpon>CadLigacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadastros\CadStatus.resx">
+      <DependentUpon>CadStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cadastros\CadUsuario.resx">
       <DependentUpon>CadUsuario.cs</DependentUpon>

@@ -10,6 +10,5 @@ namespace ControleLigacoes.dados
         public string Login { get; set; }
         public string Senha { get; set; }
         public TipoUsuario Tipo { get; set; }
-
     }
 }
