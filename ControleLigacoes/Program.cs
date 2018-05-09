@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using ControleLigacoes.cadastros;
+using ControleLigacoes.dados;
 using Menu = ControleLigacoes.cadastros.Menu;
 
 namespace ControleLigacoes
@@ -15,7 +17,15 @@ namespace ControleLigacoes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu());
+            //Application.Run(new Menu());
+
+            using (LigacoesContext context = new LigacoesContext())
+            {
+                Cliente[] clientes = context.Clientes.ToArray();
+                Console.WriteLine($"Nós temos {clientes.Length} cliente(s).");
+            }
+
+            
         }
     }
 }

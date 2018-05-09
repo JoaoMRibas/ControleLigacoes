@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ControleLigacoes.dados
 {
-    class HistoricoStatus
+    public class HistoricoStatus
     {
         public Guid Id { get; set; }
         public Guid _idLigacao;
-
+        public Guid _idUsuario;
 
         public Guid IdLigacao
         {
@@ -29,8 +29,26 @@ namespace ControleLigacoes.dados
             }
         }
 
+        public Guid IdUsuario
+        {
+            get => _idUsuario;
+            set
+            {
+                _idUsuario = value;
+                if (IdUsuario.IsEmpty())
+                {
+                    Usuario = null;
+                    return;
+                }
+
+                List<Usuario> usuarios = Extensions.CarregarDados<Usuario>();
+                Usuario = usuarios.FirstOrDefault(u => IdUsuario.Equals(u.Id));
+            }
+        }
+
+        public Usuario Usuario { get; set; }
         public Ligacao Ligacao {get; set;}
         public DateTime DataHora { get; set; }
-        public string Status { get; set; }
+        public OpcoesStatus Status { get; set; }
     }
 }

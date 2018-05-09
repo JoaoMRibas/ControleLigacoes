@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace ControleLigacoes.dados
 {
     public class Ligacao
     {
+        [Key]
         private Guid _idCliente;
         private Guid _idUsuario;
         public Guid Id { get; set; }

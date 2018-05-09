@@ -51,6 +51,7 @@ namespace ControleLigacoes.cadastros
         private Consulta<Ligacao> _consultaLigacao;
         private Consulta<Usuario> _consultaUsuario;
         private Consulta<Cliente> _consultaCliente;
+        
 
         public void EnviarInfo()
         {
@@ -239,7 +240,7 @@ namespace ControleLigacoes.cadastros
             }
         }
 
-
+        public HistoricoStatus Historico { get; set; }
 
         public void CarregarDadosStatus()
         {
@@ -248,7 +249,7 @@ namespace ControleLigacoes.cadastros
             foreach (Ligacao ligacao in ligacoes.Deserialize<List<Ligacao>>())
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DtGvStatus, LigacaoAtual.Codigo, LigacaoAtual.Usuario.Nome, LigacaoAtual.DataHora);
+                row.CreateCells(DtGvStatus, Historico.Ligacao.Codigo , Historico.Usuario.Nome, Historico.DataHora, Historico.Status);
                 row.Tag = ligacao;
                 DtGvStatus.Rows.Add(row);
             }
