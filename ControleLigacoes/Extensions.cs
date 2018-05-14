@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ControleLigacoes.dados;
 using Newtonsoft.Json;
 
@@ -37,19 +38,6 @@ namespace ControleLigacoes
 
         #endregion
 
-        #region Carregar Dados
-
-        public static List<T> CarregarDados<T>()
-        {
-            return CarregarDados<T>(FileNames.GetFileName<T>());
-        }
-
-        public static List<T> CarregarDados<T>(this string fileName)
-        {
-            string dados = File.ReadAllText($"C:\\Users\\user\\Desktop\\Teste\\{fileName}");
-            return dados.Deserialize<List<T>>();
-        }
-
-        #endregion
+       
     }
 }

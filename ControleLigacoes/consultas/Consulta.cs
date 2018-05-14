@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using ControleLigacoes.dados;
 
@@ -46,17 +47,20 @@ namespace ControleLigacoes.consultas
                         cliente.Cnpj, cliente.Telefone, cliente.Email
                     };
                 };
+                Carregar = () =>
+                {
+                    using (LigacoesContext context = new LigacoesContext())
+                    {
+                        return context.Clientes.OfType<T>().ToList();
+                    }
+                };
             }
             else if (typeof(T) == typeof(Usuario))
             {
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "Codigo"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Nome", Name = "Nome"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Login", Name = "Login"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "Tipo de Usuário",
-                    Name = "TipoUsuario"
-                });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn{HeaderText = "Tipo de Usuário",Name = "TipoUsuario"});
                 CreateCells = obj =>
                 {
                     //return usuario == null ? null : new object[] { usuario.Codigo, usuario.Nome, usuario.Login, usuario.Tipo };
@@ -71,6 +75,15 @@ namespace ControleLigacoes.consultas
 
 
                 };
+
+                Carregar = () =>
+                {
+                    using (LigacoesContext context = new LigacoesContext())
+                    {
+                        return context.Usuarios.OfType<T>().ToList();
+                    }
+                };
+
             }
 
             if (typeof(T) == typeof(Ligacao))
@@ -91,10 +104,19 @@ namespace ControleLigacoes.consultas
                     return new object[]
                         {ligacao.Codigo, ligacao.DataHora, ligacao.Cliente.RazaoSocial, ligacao.Usuario.Nome, ligacao.Observacoes};
                 };
+                Carregar = () =>
+                {
+                    using (LigacoesContext context = new LigacoesContext())
+                    {
+                        return context.Ligacoes.OfType<T>().ToList();
+                    }
+                };
             }
         }
 
         private Func<T,object[]> CreateCells { get; set; }
+
+        private Func<List<T>> Carregar { get; set; }
 
         private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -124,7 +146,7 @@ namespace ControleLigacoes.consultas
         public void CarregarDados()
         {
             dataGridView1.Rows.Clear();
-            foreach (T d in Extensions.CarregarDados<T>())
+            foreach (T d in Carregar())
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1, CreateCells(d));

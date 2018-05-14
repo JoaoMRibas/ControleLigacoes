@@ -26,10 +26,15 @@ namespace ControleLigacoes.dados
                     return;
                 }
 
-                List<Cliente> clientes = Extensions.CarregarDados<Cliente>();
+
+                List<Cliente> clientes;
+                using (LigacoesContext context = new LigacoesContext())
+                {
+                    clientes = context.Clientes.ToList();
+                }
+
                 Cliente = clientes.FirstOrDefault(c => IdCliente.Equals(c.Id));
             }
-
         }
 
         public Guid IdUsuario
@@ -44,7 +49,11 @@ namespace ControleLigacoes.dados
                     return;
                 }
 
-                List<Usuario> usuarios = Extensions.CarregarDados<Usuario>();
+                List<Usuario> usuarios;
+                using (LigacoesContext context = new LigacoesContext())
+                {
+                    usuarios = context.Usuarios.ToList();
+                }
                 Usuario = usuarios.FirstOrDefault(u => IdUsuario.Equals(u.Id));
             }
         }

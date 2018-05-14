@@ -188,8 +188,7 @@ namespace ControleLigacoes.cadastros
             Usuario.Text = obj.Usuario.Nome;
             Usuario.Tag = obj.Usuario;            
             Observacoes.Text = obj.Observacoes;
-            ExibeStatus();
-            
+ 
         }
 
 
@@ -242,25 +241,9 @@ namespace ControleLigacoes.cadastros
 
         public HistoricoStatus Historico { get; set; }
 
-        public void CarregarDadosStatus()
-        {
-            DtGvStatus.Rows.Clear();
-            string ligacoes = File.ReadAllText("C:\\Users\\user\\Desktop\\Teste\\ligacoes.json");
-            foreach (Ligacao ligacao in ligacoes.Deserialize<List<Ligacao>>())
-            {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DtGvStatus, Historico.Ligacao.Codigo , Historico.Usuario.Nome, Historico.DataHora, Historico.Status);
-                row.Tag = ligacao;
-                DtGvStatus.Rows.Add(row);
-            }
+        
 
 
-        }
-
-        public void ExibeStatus()
-        {
-            CarregarDadosStatus();
-        }
 
         private void BtStatus_Click(object sender, EventArgs e)
         {

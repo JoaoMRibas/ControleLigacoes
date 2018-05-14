@@ -17,15 +17,9 @@ namespace ControleLigacoes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Menu());
-
-            using (LigacoesContext context = new LigacoesContext())
-            {
-                Cliente[] clientes = context.Clientes.ToArray();
-                Console.WriteLine($"Nós temos {clientes.Length} cliente(s).");
-            }
-
-            
+            Application.Run(new Menu());
         }
+
+
     }
 }

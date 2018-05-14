@@ -98,26 +98,15 @@ namespace ControleLigacoes.cadastros
             instancia.Email = Email.Text;
             instancia.Telefone = Telefone.Text;
 
-            List<Cliente> clientes;
-            string filePath = diretorio + "\\clientes.json";
-            if (File.Exists(filePath))
+            using (LigacoesContext context = new LigacoesContext())
             {
-                string txt = File.ReadAllText(diretorio + "\\clientes.json");
-                clientes = txt.Deserialize<List<Cliente>>();
-            }
-            else
-            {
-                clientes = new List<Cliente>();
+
+
+                context.Clientes.Add(instancia);
+                context.SaveChanges();
+
             }
 
-
-
-            clientes = clientes.Where(u => { return instancia.Id != u.Id; }).ToList();
-            clientes.Add(instancia);
-
-
-            string clientesTxt = clientes.Serialize();
-            File.WriteAllText(filePath, clientesTxt);
             Limpar();
 
         }
@@ -192,21 +181,14 @@ namespace ControleLigacoes.cadastros
         {
             if (ClienteAtual != null)
             {
-                List<Cliente> clientes;
-                string filePath = diretorio + "\\Clientes.json";
-                if (File.Exists(filePath))
+                using (LigacoesContext context = new LigacoesContext())
                 {
-                    string txt = File.ReadAllText(diretorio + "\\clientes.json");
-                    clientes = txt.Deserialize<List<Cliente>>();
-                }
-                else
-                {
-                    clientes = new List<Cliente>();
-                }
 
-                clientes = clientes.Where(u => { return ClienteAtual.Id != u.Id; }).ToList();
-                string clienteTxt = clientes.Serialize();
-                File.WriteAllText(filePath, clienteTxt);
+
+                    context.Clientes.Remove(ClienteAtual);
+                    context.SaveChanges();
+
+                }
                 Limpar();
             }
         }

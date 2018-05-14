@@ -11,6 +11,7 @@ namespace ControleLigacoes.dados
             modelBuilder.HasDefaultSchema("public");
             base.OnModelCreating(modelBuilder);
         }
+        
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }

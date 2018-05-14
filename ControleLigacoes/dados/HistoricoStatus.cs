@@ -24,8 +24,12 @@ namespace ControleLigacoes.dados
                     return;
                 }
 
-                List<Ligacao> ligacao = Extensions.CarregarDados<Ligacao>();
-                Ligacao = ligacao.FirstOrDefault(l => IdLigacao.Equals(l.Id));
+                List<Ligacao> ligacoes;
+                using (LigacoesContext context = new LigacoesContext())
+                {
+                    ligacoes = context.Ligacoes.ToList();
+                }
+                Ligacao = ligacoes.FirstOrDefault(l => IdLigacao.Equals(l.Id));
             }
         }
 
@@ -41,7 +45,11 @@ namespace ControleLigacoes.dados
                     return;
                 }
 
-                List<Usuario> usuarios = Extensions.CarregarDados<Usuario>();
+                List<Usuario> usuarios;
+                using (LigacoesContext context = new LigacoesContext())
+                {
+                    usuarios = context.Usuarios.ToList();
+                }
                 Usuario = usuarios.FirstOrDefault(u => IdUsuario.Equals(u.Id));
             }
         }

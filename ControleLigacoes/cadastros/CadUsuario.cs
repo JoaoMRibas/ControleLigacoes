@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -111,28 +112,20 @@ namespace ControleLigacoes.cadastros
 
 
 
-            List<Usuario> usuarios;
-            string filePath = diretorio + "\\usuarios.json";
-            if (File.Exists(filePath))
-            {
-                string txt = File.ReadAllText(diretorio + "\\usuarios.json");
-                usuarios = txt.Deserialize<List<Usuario>>();
-            }
-            else
-            {
-                usuarios = new List<Usuario>();
-            }
+
+           
 
 
 
-            usuarios = usuarios.Where(u => { return instancia.Id != u.Id; }).ToList();
-            usuarios.Add(instancia);
-            string usuariosTxt = usuarios.Serialize();
-            File.WriteAllText(filePath, usuariosTxt);
+
+            //usuarios = usuarios.Where(u => { return instancia.Id != u.Id; }).ToList();
+            //usuarios.Add(instancia);
+            //string usuariosTxt = usuarios.Serialize();
+            //File.WriteAllText(filePath, usuariosTxt);
             LimparCampos();
 
         }
-
+       
 
 
         public void criarArquivo()
