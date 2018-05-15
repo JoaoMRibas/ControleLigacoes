@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ControleLigacoes.dados
 {
     public class Usuario
     {
-        [Key]
         public Guid Id { get; set; }
         public int Codigo { get; set; }
         public string Nome { get; set; }

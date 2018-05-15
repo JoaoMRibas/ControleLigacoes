@@ -27,8 +27,16 @@ namespace ControleLigacoes.consultas
             if (typeof(T) == typeof(Cliente))
             {
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "CodCli"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn{HeaderText = "Razão Social",Name = "RazaoSocial"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Nome Fantasia",Name = "NomeFantasia"});
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "Razão Social",
+                    Name = "RazaoSocial"
+                });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "Nome Fantasia",
+                    Name = "NomeFantasia"
+                });
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "CNPJ", Name = "Cnpj"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Telefone", Name = "Telefone"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "E-mail", Name = "Email"});
@@ -60,7 +68,11 @@ namespace ControleLigacoes.consultas
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "Codigo"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Nome", Name = "Nome"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Login", Name = "Login"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn{HeaderText = "Tipo de Usuário",Name = "TipoUsuario"});
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "Tipo de Usuário",
+                    Name = "TipoUsuario"
+                });
                 CreateCells = obj =>
                 {
                     //return usuario == null ? null : new object[] { usuario.Codigo, usuario.Nome, usuario.Login, usuario.Tipo };
@@ -89,10 +101,18 @@ namespace ControleLigacoes.consultas
             if (typeof(T) == typeof(Ligacao))
             {
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Código", Name = "Codigo"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Data e Hora", Name = "DataHora"});
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "Data e Hora",
+                    Name = "DataHora"
+                });
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Cliente", Name = "Cliente"});
                 dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Usuário", Name = "Usuario"});
-                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn {HeaderText = "Observações", Name = "Observacoes", });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "Observações",
+                    Name = "Observacoes",
+                });
                 CreateCells = obj =>
                 {
                     Ligacao ligacao = obj as Ligacao;
@@ -102,13 +122,18 @@ namespace ControleLigacoes.consultas
                     }
 
                     return new object[]
-                        {ligacao.Codigo, ligacao.DataHora, ligacao.Cliente.RazaoSocial, ligacao.Usuario.Nome, ligacao.Observacoes};
+                    {
+                        ligacao.Codigo, ligacao.DataHora, ligacao.Cliente.RazaoSocial,
+                        ligacao.Usuario.Nome, ligacao.Observacoes
+                    };
                 };
                 Carregar = () =>
                 {
                     using (LigacoesContext context = new LigacoesContext())
                     {
-                        return context.Ligacoes.OfType<T>().ToList();
+                        return context.Ligacoes.Include(nameof(Ligacao.Cliente))
+                            .Include(nameof(Ligacao.Usuario))
+                            .OfType<T>().ToList();
                     }
                 };
             }

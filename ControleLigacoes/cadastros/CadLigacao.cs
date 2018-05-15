@@ -89,31 +89,23 @@ namespace ControleLigacoes.cadastros
             instancia.Cliente = Cliente.Tag as Cliente;
             instancia.DataHora = Data;
             instancia.Observacoes = Observacoes.Text;
-             
 
 
-
-
-
-
-            List<Ligacao> ligacoes;
-            string filePath = diretorio + "\\ligacoes.json";
-            if (File.Exists(filePath))
+            using (LigacoesContext context = new LigacoesContext())
             {
-                string txt = File.ReadAllText(diretorio + "\\ligacoes.json");
-                ligacoes = txt.Deserialize<List<Ligacao>>();
+                if (instancia.Cliente != null)
+                {
+                    context.Clientes.Attach(instancia.Cliente);
+                }
+
+                if (instancia.Usuario != null)
+                {
+                    context.Usuarios.Attach(instancia.Usuario);
+                }
+                context.Ligacoes.Add(instancia);
+                context.SaveChanges();
+
             }
-            else
-            {
-                ligacoes = new List<Ligacao>();
-            }
-
-
-
-            ligacoes = ligacoes.Where(u => { return instancia.Id != u.Id; }).ToList();
-            ligacoes.Add(instancia);
-            string ligacoesTxt = ligacoes.Serialize();
-            File.WriteAllText(filePath, ligacoesTxt);
             LimparCampos();
 
         }
@@ -220,30 +212,19 @@ namespace ControleLigacoes.cadastros
         {
             if (LigacaoAtual != null)
             {
-                List<Ligacao> ligacoes;
-                string filePath = diretorio + "\\ligacoes.json";
-                if (File.Exists(filePath))
+                using (LigacoesContext context = new LigacoesContext())
                 {
-                    string txt = File.ReadAllText(diretorio + "\\ligacoes.json");
-                    ligacoes = txt.Deserialize<List<Ligacao>>();
-                }
-                else
-                {
-                    ligacoes = new List<Ligacao>();
-                }
 
-                ligacoes = ligacoes.Where(u => { return LigacaoAtual.Id != u.Id; }).ToList();
-                string ligacoesTxt = ligacoes.Serialize();
-                File.WriteAllText(filePath, ligacoesTxt);
+                    context.Ligacoes.Attach(LigacaoAtual);
+                    context.Ligacoes.Remove(LigacaoAtual);
+                    context.SaveChanges();
+
+                }
                 LimparCampos();
             }
         }
 
         public HistoricoStatus Historico { get; set; }
-
-        
-
-
 
         private void BtStatus_Click(object sender, EventArgs e)
         {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ControleLigacoes.dados
 {
     public class Cliente
     {
-        [Key]
         public Guid Id { get; set; }
         public int Codigo { get; set; }
         public string RazaoSocial { get; set; }
@@ -14,6 +12,4 @@ namespace ControleLigacoes.dados
         public string Telefone { get; set; }
         public string Email { get; set; }
     }
-
-
 }

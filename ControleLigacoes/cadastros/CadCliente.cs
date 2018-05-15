@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Objects;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -184,7 +185,7 @@ namespace ControleLigacoes.cadastros
                 using (LigacoesContext context = new LigacoesContext())
                 {
 
-
+                    context.Clientes.Attach(ClienteAtual);
                     context.Clientes.Remove(ClienteAtual);
                     context.SaveChanges();
 

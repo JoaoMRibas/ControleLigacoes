@@ -4,7 +4,10 @@ namespace ControleLigacoes.dados
 {
     public class LigacoesContext : DbContext
     {
-        public LigacoesContext() : base(nameOrConnectionString: "Postgres") { }
+        public LigacoesContext() : base(nameOrConnectionString: "Postgres")
+        {
+            //Configuration.LazyLoadingEnabled = false;
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -16,5 +19,6 @@ namespace ControleLigacoes.dados
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Ligacao> Ligacoes { get; set; }
+        public DbSet<HistoricoStatus> HistoricosStatus { get; set; }
     }
 }

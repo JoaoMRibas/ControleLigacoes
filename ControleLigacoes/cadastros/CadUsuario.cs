@@ -108,20 +108,14 @@ namespace ControleLigacoes.cadastros
             instancia.Senha = Senha.Text;
             instancia.Tipo = tipo;
 
+            using (LigacoesContext context = new LigacoesContext())
+            {
 
 
+                context.Usuarios.Add(instancia);
+                context.SaveChanges();
 
-
-
-           
-
-
-
-
-            //usuarios = usuarios.Where(u => { return instancia.Id != u.Id; }).ToList();
-            //usuarios.Add(instancia);
-            //string usuariosTxt = usuarios.Serialize();
-            //File.WriteAllText(filePath, usuariosTxt);
+            }
             LimparCampos();
 
         }
@@ -239,21 +233,14 @@ namespace ControleLigacoes.cadastros
         {
             if (UsuarioAtual != null)
             {
-                List<Usuario> usuarios;
-                string filePath = diretorio + "\\usuarios.json";
-                if (File.Exists(filePath))
+                using (LigacoesContext context = new LigacoesContext())
                 {
-                    string txt = File.ReadAllText(diretorio + "\\usuarios.json");
-                    usuarios = txt.Deserialize<List<Usuario>>();
-                }
-                else
-                {
-                    usuarios = new List<Usuario>();
-                }
 
-                usuarios = usuarios.Where(u => { return UsuarioAtual.Id != u.Id;}).ToList();
-                string usuariosTxt = usuarios.Serialize();
-                File.WriteAllText(filePath, usuariosTxt);
+                    context.Usuarios.Attach(UsuarioAtual);
+                    context.Usuarios.Remove(UsuarioAtual);
+                    context.SaveChanges();
+
+                }
                 LimparCampos();
             }
         }
