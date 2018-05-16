@@ -23,6 +23,11 @@ namespace ControleLigacoes.cadastros
             DtGvStatus.MultiSelect = false;
             DtGvStatus.AllowUserToDeleteRows = false;
             DtGvStatus.ReadOnly = true;
+            DtGvStatus.RowHeadersVisible = false;
+            DtGvStatus.AllowUserToAddRows = false;
+            DtGvStatus.AllowUserToResizeRows = false;
+            DtGvStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DtGvStatus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
         }
 
@@ -61,12 +66,7 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-            if (!DateTime.TryParse(DataHora.Text, out DateTime Data))
-            {
-                MessageBox.Show("Não foi possível salvar a informação pois a data é inválida");
-                return;
-            }
-
+            
           
             Ligacao instancia = new Ligacao();
 
@@ -77,7 +77,7 @@ namespace ControleLigacoes.cadastros
                 instancia.Id = Guid.NewGuid();
             }
 
-            if (LigacaoAtual != null)
+            if (LigacaoAtual != null) 
             {
                 instancia.Id = LigacaoAtual.Id;
 
@@ -87,12 +87,14 @@ namespace ControleLigacoes.cadastros
             instancia.Codigo = cod;
             instancia.Usuario = Usuario.Tag as Usuario;
             instancia.Cliente = Cliente.Tag as Cliente;
-            instancia.DataHora = Data;
+            instancia.DataHora = DateTime.Now;
             instancia.Observacoes = Observacoes.Text;
 
 
             using (LigacoesContext context = new LigacoesContext())
             {
+
+
                 if (instancia.Cliente != null)
                 {
                     context.Clientes.Attach(instancia.Cliente);
@@ -102,6 +104,8 @@ namespace ControleLigacoes.cadastros
                 {
                     context.Usuarios.Attach(instancia.Usuario);
                 }
+
+                context.Ligacoes.Attach(instancia);
                 context.Ligacoes.Add(instancia);
                 context.SaveChanges();
 
@@ -172,14 +176,16 @@ namespace ControleLigacoes.cadastros
 
         public void ConsultaLigacaoItemSelecionado(Ligacao obj)
         {
+            
             LigacaoAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
-            DataHora.Text = obj.DataHora.ToString();
+            DataHora.Text = obj.DataHora.ToString("yyyy/MM/dd HH:mm:ss");
             Cliente.Text = obj.Cliente.RazaoSocial;
             Cliente.Tag = obj.Cliente;
             Usuario.Text = obj.Usuario.Nome;
             Usuario.Tag = obj.Usuario;            
             Observacoes.Text = obj.Observacoes;
+            CarregarDados();
  
         }
 
@@ -225,6 +231,41 @@ namespace ControleLigacoes.cadastros
         }
 
         public HistoricoStatus Historico { get; set; }
+        private Func<HistoricoStatus, object[]> CreateCells { get; set; }
+        private Func<List<HistoricoStatus>> Carregar { get; set; }
+
+        public void CarregarDados()
+        {
+            DtGvStatus.Rows.Clear();
+
+            CreateCells = obj =>
+            {
+                HistoricoStatus historicoStatus = obj as HistoricoStatus;
+                if (historicoStatus == null)
+                {
+                    return null;
+
+                }
+
+                return new object[]
+                {
+                    historicoStatus.Ligacao.Codigo, historicoStatus.Usuario.Nome, historicoStatus.DataHora,
+                    historicoStatus.Status
+                };
+            };
+
+            Carregar = () =>
+            {
+
+                using (LigacoesContext context = new LigacoesContext())
+                {
+                    return context.HistoricosStatus.OfType<HistoricoStatus>().ToList();
+                }
+
+            };
+
+
+        }
 
         private void BtStatus_Click(object sender, EventArgs e)
         {
@@ -233,4 +274,3 @@ namespace ControleLigacoes.cadastros
         }
     }
 }
-

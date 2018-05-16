@@ -30,6 +30,7 @@
         {
             this.OpcaoStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.BtnSalvar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpcaoStatus
@@ -49,11 +50,22 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Selecione uma opção de status:";
             // 
+            // BtnSalvar
+            // 
+            this.BtnSalvar.Location = new System.Drawing.Point(39, 86);
+            this.BtnSalvar.Name = "BtnSalvar";
+            this.BtnSalvar.Size = new System.Drawing.Size(63, 24);
+            this.BtnSalvar.TabIndex = 2;
+            this.BtnSalvar.Text = "Salvar";
+            this.BtnSalvar.UseVisualStyleBackColor = true;
+            this.BtnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            // 
             // CadStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(167, 150);
+            this.Controls.Add(this.BtnSalvar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpcaoStatus);
             this.Name = "CadStatus";
@@ -67,5 +79,6 @@
 
         private System.Windows.Forms.ComboBox OpcaoStatus;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button BtnSalvar;
     }
 }

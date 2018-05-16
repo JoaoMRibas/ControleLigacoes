@@ -102,7 +102,10 @@ namespace ControleLigacoes.cadastros
             using (LigacoesContext context = new LigacoesContext())
             {
 
-
+                if (ClienteAtual != null)
+                {
+                    context.Clientes.
+                }
                 context.Clientes.Add(instancia);
                 context.SaveChanges();
 
