@@ -56,7 +56,7 @@ namespace ControleLigacoes.cadastros
         private Consulta<Ligacao> _consultaLigacao;
         private Consulta<Usuario> _consultaUsuario;
         private Consulta<Cliente> _consultaCliente;
-        
+
 
         public void EnviarInfo()
         {
@@ -66,33 +66,31 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-            
-          
-            Ligacao instancia = new Ligacao();
-
-            //se  for o 1 caso então cria um Id novo
-            //se for o 2 caso então mantém o mesmo Id
-            if (LigacaoAtual == null)
-            {
-                instancia.Id = Guid.NewGuid();
-            }
-
-            if (LigacaoAtual != null) 
-            {
-                instancia.Id = LigacaoAtual.Id;
-
-            }
-
-            
-            instancia.Codigo = cod;
-            instancia.Usuario = Usuario.Tag as Usuario;
-            instancia.Cliente = Cliente.Tag as Cliente;
-            instancia.DataHora = DateTime.Now;
-            instancia.Observacoes = Observacoes.Text;
-
 
             using (LigacoesContext context = new LigacoesContext())
             {
+                Ligacao instancia = LigacaoAtual == null
+                    ? null
+                    : context.Ligacoes.FirstOrDefault(c => c.Id.Equals(LigacaoAtual.Id));
+
+
+
+                bool isInsert = false;
+                if (instancia == null)
+                {
+                    isInsert = true;
+                    instancia = new Ligacao();
+                    instancia.Id = Guid.NewGuid();
+
+                }
+
+                instancia.Codigo = cod;
+                instancia.Usuario = Usuario.Tag as Usuario;
+                instancia.Cliente = Cliente.Tag as Cliente;
+                instancia.DataHora = DateTime.Now;
+                instancia.Observacoes = Observacoes.Text;
+
+
 
 
                 if (instancia.Cliente != null)
@@ -106,10 +104,17 @@ namespace ControleLigacoes.cadastros
                 }
 
                 context.Ligacoes.Attach(instancia);
-                context.Ligacoes.Add(instancia);
-                context.SaveChanges();
+                
 
+                if (isInsert)
+                {
+                    context.Ligacoes.Add(instancia);
+                }
+
+                context.SaveChanges();
             }
+
+
             LimparCampos();
 
         }
@@ -185,13 +190,13 @@ namespace ControleLigacoes.cadastros
             Usuario.Text = obj.Usuario.Nome;
             Usuario.Tag = obj.Usuario;            
             Observacoes.Text = obj.Observacoes;
-            CarregarDados();
+            
  
         }
 
 
         private Ligacao LigacaoAtual { get; set; }
-
+        
 
 
         private void BtCliente_Click(object sender, EventArgs e)
@@ -230,42 +235,13 @@ namespace ControleLigacoes.cadastros
             }
         }
 
+        
         public HistoricoStatus Historico { get; set; }
         private Func<HistoricoStatus, object[]> CreateCells { get; set; }
         private Func<List<HistoricoStatus>> Carregar { get; set; }
 
-        public void CarregarDados()
-        {
-            DtGvStatus.Rows.Clear();
+        
 
-            CreateCells = obj =>
-            {
-                HistoricoStatus historicoStatus = obj as HistoricoStatus;
-                if (historicoStatus == null)
-                {
-                    return null;
-
-                }
-
-                return new object[]
-                {
-                    historicoStatus.Ligacao.Codigo, historicoStatus.Usuario.Nome, historicoStatus.DataHora,
-                    historicoStatus.Status
-                };
-            };
-
-            Carregar = () =>
-            {
-
-                using (LigacoesContext context = new LigacoesContext())
-                {
-                    return context.HistoricosStatus.OfType<HistoricoStatus>().ToList();
-                }
-
-            };
-
-
-        }
 
         private void BtStatus_Click(object sender, EventArgs e)
         {

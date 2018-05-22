@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
 
@@ -13,8 +14,7 @@ namespace ControleLigacoes.cadastros
 {
     public partial class CadUsuario : Form
     {
-
-
+        
         public CadUsuario()
         {
             InitializeComponent();
@@ -85,37 +85,37 @@ namespace ControleLigacoes.cadastros
             }
 
 
-
-            Usuario instancia = new Usuario();
-
-            //se  for o 1 caso então cria um Id novo
-            //se for o 2 caso então mantém o mesmo Id
-            if (UsuarioAtual == null)
-            {
-                instancia.Id = Guid.NewGuid();
-            }
-
-            if (UsuarioAtual != null)
-            {
-                instancia.Id = UsuarioAtual.Id;
-
-            }
-
-
-            instancia.Codigo = cod;
-            instancia.Nome = Nome.Text;
-            instancia.Login = Login.Text;
-            instancia.Senha = Senha.Text;
-            instancia.Tipo = tipo;
-
             using (LigacoesContext context = new LigacoesContext())
             {
 
+                Usuario instancia = UsuarioAtual == null
+                    ? null
+                    : context.Usuarios.FirstOrDefault(c => c.Id.Equals(UsuarioAtual.Id));
 
-                context.Usuarios.Add(instancia);
+                bool isInsert = false;
+                
+                if (instancia == null)
+                {
+                    isInsert = true;
+                    instancia = new Usuario();
+                    instancia.Id = Guid.NewGuid();
+                }
+
+                instancia.Codigo = cod;
+                instancia.Nome = Nome.Text;
+                instancia.Login = Login.Text;
+                instancia.Senha = Senha.Text;
+                instancia.Tipo = tipo;
+
+                if (isInsert)
+                {
+                    context.Usuarios.Add(instancia);
+
+                }
+
                 context.SaveChanges();
-
             }
+
             LimparCampos();
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace ControleLigacoes.cadastros
 
         private void EnviarInfoCliente()
         {
-            
+
             if (!int.TryParse(Codigo.Text, out int cod))
             {
                 MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
@@ -58,7 +59,7 @@ namespace ControleLigacoes.cadastros
             }
 
             string cnpj = Cnpj.Text;
-
+            
             if (cnpj.Length != 14)
             {
                 MessageBox.Show("Não foi possível salvar a informação, pois o campo Cnpj deve conter 14 dígitos");
@@ -77,36 +78,33 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-
-
-
-
-            Cliente instancia = new Cliente();
-            if (ClienteAtual == null)
-            {
-                instancia.Id = Guid.NewGuid();
-            }
-
-            if (ClienteAtual != null)
-            {
-                instancia.Id = ClienteAtual.Id;
-            }
-            
-            instancia.Codigo = cod;
-            instancia.RazaoSocial = RazaoSocial.Text;
-            instancia.NomeFantasia = NomeFantasia.Text;
-            instancia.Cnpj = cnpj;
-            instancia.Email = Email.Text;
-            instancia.Telefone = Telefone.Text;
-
             using (LigacoesContext context = new LigacoesContext())
             {
 
-                if (ClienteAtual != null)
+                Cliente instancia = ClienteAtual == null
+                    ? null
+                    : context.Clientes.FirstOrDefault(c => c.Id.Equals(ClienteAtual.Id));
+
+                bool isInsert = false;
+                if (instancia == null)
                 {
-                    context.Clientes.
+                    isInsert = true;
+                    instancia = new Cliente();
+                    instancia.Id = Guid.NewGuid();
                 }
-                context.Clientes.Add(instancia);
+
+                instancia.Codigo = cod;
+                instancia.RazaoSocial = RazaoSocial.Text;
+                instancia.NomeFantasia = NomeFantasia.Text;
+                instancia.Cnpj = cnpj;
+                instancia.Email = Email.Text;
+                instancia.Telefone = Telefone.Text;
+
+                if (isInsert)
+                {
+                    context.Clientes.Add(instancia);
+                }
+
                 context.SaveChanges();
 
             }
