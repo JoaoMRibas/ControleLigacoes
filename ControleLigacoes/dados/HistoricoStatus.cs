@@ -10,4 +10,6 @@ namespace ControleLigacoes.dados
         public DateTime DataHora { get; set; }
         public OpcoesStatus Status { get; set; }
     }
+
+    
 }

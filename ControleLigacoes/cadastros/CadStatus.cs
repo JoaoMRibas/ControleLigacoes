@@ -16,6 +16,7 @@ namespace ControleLigacoes.cadastros
     public partial class CadStatus : Form
     {
         private Consulta<Usuario> _consultaUsuario;
+        private Consulta<Ligacao> _consultaLigacao;
         
         private CadUsuario _consulta;
         public CadStatus()
@@ -41,17 +42,8 @@ namespace ControleLigacoes.cadastros
         {
             OpcaoStatus.SelectedItem = null;
             Usuario.Clear();
+            Ligacao.Clear();
         }
-
-        
-        private Ligacao LigacaoAtual { get; set; }
-
-        public void ConsultaLigacaoItemSelecionado(Ligacao obj)
-        {
-            LigacaoAtual = obj;
-        }
-
-        
 
         public void EnviarInfo()
         {
@@ -76,6 +68,9 @@ namespace ControleLigacoes.cadastros
                 instancia.Id = Guid.NewGuid();
                 instancia.Usuario = Usuario.Tag as Usuario;
                 instancia.DataHora = DateTime.Now;
+                instancia.Ligacao = Ligacao.Tag as Ligacao; 
+                
+                
 
                 if (instancia.Ligacao != null)
                 {
@@ -111,11 +106,34 @@ namespace ControleLigacoes.cadastros
 
         }
 
+        private Consulta<Ligacao> ConsultaLigacao
+        {
+            get
+            {
+                if (_consultaLigacao == null)
+                {
+                    _consultaLigacao = new Consulta<Ligacao>();
+                    _consultaLigacao.ItemSelecionado += ConsultaLigacaoItemSelecionado;
+                }
+
+                return _consultaLigacao;
+
+            }
+        }
+
+
         public void ConsultaUsuarioItemSelecionado(Usuario obj)
         {
 
             Usuario.Text = obj.Nome;
             Usuario.Tag = obj;
+        }
+
+        public void ConsultaLigacaoItemSelecionado(Ligacao obj)
+        {
+            Ligacao.Text = obj.Codigo.ToString();
+            Ligacao.Tag = obj;
+
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
@@ -127,6 +145,11 @@ namespace ControleLigacoes.cadastros
         private void BtUsuario_Click(object sender, EventArgs e)
         {
             ConsultaUsuario.Exibe();
+        }
+
+        private void BtnLigacao_Click(object sender, EventArgs e)
+        {
+            ConsultaLigacao.Exibe();
         }
     }
 

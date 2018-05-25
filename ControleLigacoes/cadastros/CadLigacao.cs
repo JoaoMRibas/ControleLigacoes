@@ -16,6 +16,7 @@ namespace ControleLigacoes.cadastros
     public partial class BtStatus : Form
     {
 
+
         public BtStatus()
         {
             InitializeComponent();
@@ -28,6 +29,33 @@ namespace ControleLigacoes.cadastros
             DtGvStatus.AllowUserToResizeRows = false;
             DtGvStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DtGvStatus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            if (typeof(HistoricoStatus) == typeof(HistoricoStatus))
+            {
+                
+                CreateCells = obj =>
+                {
+                    HistoricoStatus historicoStatus = obj as HistoricoStatus;
+                    if (historicoStatus == null)
+                    {
+                        return null;
+
+                    }
+
+                    return new object[]
+                    {
+                        historicoStatus.Ligacao.Codigo, historicoStatus.DataHora, historicoStatus.Usuario.Nome,
+                        historicoStatus.Status
+                    };
+                };
+                Carregar = () =>
+                {
+                    using (LigacoesContext context = new LigacoesContext())
+                    {
+                        return context.HistoricosStatus.OfType<HistoricoStatus>().ToList();
+                    }
+                };
+            }
 
         }
 
@@ -190,12 +218,12 @@ namespace ControleLigacoes.cadastros
             Usuario.Text = obj.Usuario.Nome;
             Usuario.Tag = obj.Usuario;            
             Observacoes.Text = obj.Observacoes;
-            
+            CarregarDados();
  
         }
 
 
-        private Ligacao LigacaoAtual { get; set; }
+        public Ligacao LigacaoAtual { get; set; }
         
 
 
@@ -235,18 +263,32 @@ namespace ControleLigacoes.cadastros
             }
         }
 
+
         
         public HistoricoStatus Historico { get; set; }
         private Func<HistoricoStatus, object[]> CreateCells { get; set; }
         private Func<List<HistoricoStatus>> Carregar { get; set; }
 
-        
+
+        public void CarregarDados()
+        {
+            DtGvStatus.Rows.Clear();
+            foreach (HistoricoStatus d in Carregar())
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(DtGvStatus, CreateCells(d));
+                row.Tag = d;
+                DtGvStatus.Rows.Add(row);
+            }
+
+        }
 
 
         private void BtStatus_Click(object sender, EventArgs e)
         {
             CadStatus status = new CadStatus();
             status.ShowDialog();
+            
         }
     }
 }

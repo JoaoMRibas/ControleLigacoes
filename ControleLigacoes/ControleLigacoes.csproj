@@ -125,6 +125,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LigacaoAtual\Assembly.cs" />
     <Compile Include="Migrations\201805091433190_InitialCreate.cs" />
     <Compile Include="Migrations\201805091433190_InitialCreate.Designer.cs">
       <DependentUpon>201805091433190_InitialCreate.cs</DependentUpon>
