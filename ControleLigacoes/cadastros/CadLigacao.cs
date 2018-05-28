@@ -52,7 +52,8 @@ namespace ControleLigacoes.cadastros
                 {
                     using (LigacoesContext context = new LigacoesContext())
                     {
-                        return context.HistoricosStatus.OfType<HistoricoStatus>().ToList();
+                        return context.HistoricosStatus.Include(nameof(HistoricoStatus.Usuario))
+                            .Include(nameof(HistoricoStatus.Ligacao)).OfType<HistoricoStatus>().ToList();
                     }
                 };
             }

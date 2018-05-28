@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -64,28 +66,27 @@ namespace ControleLigacoes.cadastros
             using (LigacoesContext context = new LigacoesContext())
             {
 
+                Ligacao ligacao = Ligacao.Tag as Ligacao;
+                //if (ligacao != null)
+                //{
+                //    context.Ligacoes.Attach(ligacao);
+                //}
+
+                Usuario usuario = Usuario.Tag as Usuario;
+                //if (usuario != null)
+                //{
+                //    context.Usuarios.Attach(usuario);
+                //}
 
                 instancia.Id = Guid.NewGuid();
-                instancia.Usuario = Usuario.Tag as Usuario;
                 instancia.DataHora = DateTime.Now;
-                instancia.Ligacao = Ligacao.Tag as Ligacao; 
-                
-                
+                instancia.Usuario = usuario;
+                instancia.Ligacao = ligacao;
 
-                if (instancia.Ligacao != null)
-                {
-                    context.Ligacoes.Attach(instancia.Ligacao);
-                }
-                
-                if (instancia.Usuario != null)
-                {
-                    context.Usuarios.Attach(instancia.Usuario);
-                }
-                
-                
-               
+                //context.HistoricosStatus.Add(instancia);
 
-                context.HistoricosStatus.Add(instancia);
+                context.HistoricosStatus.Attach(instancia);
+
                 context.SaveChanges();
                 Limpar();
             }
