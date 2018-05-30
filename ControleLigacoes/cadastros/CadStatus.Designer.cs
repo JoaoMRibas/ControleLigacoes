@@ -33,8 +33,6 @@
             this.BtnSalvar = new System.Windows.Forms.Button();
             this.BtUsuario = new System.Windows.Forms.Button();
             this.Usuario = new System.Windows.Forms.TextBox();
-            this.Ligacao = new System.Windows.Forms.TextBox();
-            this.BtnLigacao = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OpcaoStatus
@@ -56,7 +54,7 @@
             // 
             // BtnSalvar
             // 
-            this.BtnSalvar.Location = new System.Drawing.Point(12, 139);
+            this.BtnSalvar.Location = new System.Drawing.Point(12, 113);
             this.BtnSalvar.Name = "BtnSalvar";
             this.BtnSalvar.Size = new System.Drawing.Size(63, 24);
             this.BtnSalvar.TabIndex = 2;
@@ -81,30 +79,11 @@
             this.Usuario.Size = new System.Drawing.Size(121, 20);
             this.Usuario.TabIndex = 4;
             // 
-            // Ligacao
-            // 
-            this.Ligacao.Location = new System.Drawing.Point(12, 113);
-            this.Ligacao.Name = "Ligacao";
-            this.Ligacao.Size = new System.Drawing.Size(121, 20);
-            this.Ligacao.TabIndex = 5;
-            // 
-            // BtnLigacao
-            // 
-            this.BtnLigacao.Location = new System.Drawing.Point(132, 113);
-            this.BtnLigacao.Name = "BtnLigacao";
-            this.BtnLigacao.Size = new System.Drawing.Size(30, 20);
-            this.BtnLigacao.TabIndex = 6;
-            this.BtnLigacao.Text = "PL";
-            this.BtnLigacao.UseVisualStyleBackColor = true;
-            this.BtnLigacao.Click += new System.EventHandler(this.BtnLigacao_Click);
-            // 
             // CadStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(208, 188);
-            this.Controls.Add(this.BtnLigacao);
-            this.Controls.Add(this.Ligacao);
+            this.ClientSize = new System.Drawing.Size(208, 157);
             this.Controls.Add(this.Usuario);
             this.Controls.Add(this.BtUsuario);
             this.Controls.Add(this.BtnSalvar);
@@ -124,7 +103,5 @@
         private System.Windows.Forms.Button BtnSalvar;
         private System.Windows.Forms.Button BtUsuario;
         private System.Windows.Forms.TextBox Usuario;
-        private System.Windows.Forms.TextBox Ligacao;
-        private System.Windows.Forms.Button BtnLigacao;
     }
 }

@@ -18,13 +18,18 @@ namespace ControleLigacoes.cadastros
     public partial class CadStatus : Form
     {
         private Consulta<Usuario> _consultaUsuario;
-        private Consulta<Ligacao> _consultaLigacao;
+        public Ligacao LigacaoHist { get; set; }
+        
+        
+
         
         private CadUsuario _consulta;
         public CadStatus()
         {
             InitializeComponent();
             Inicializa();
+            
+             
         }
 
         public void Inicializa()
@@ -44,8 +49,9 @@ namespace ControleLigacoes.cadastros
         {
             OpcaoStatus.SelectedItem = null;
             Usuario.Clear();
-            Ligacao.Clear();
         }
+
+        
 
         public void EnviarInfo()
         {
@@ -59,34 +65,30 @@ namespace ControleLigacoes.cadastros
             }
 
             HistoricoStatus instancia = new HistoricoStatus();
+
             
-
             instancia.Status = opcao;
-
+            
             using (LigacoesContext context = new LigacoesContext())
             {
-
-                Ligacao ligacao = Ligacao.Tag as Ligacao;
-                //if (ligacao != null)
-                //{
-                //    context.Ligacoes.Attach(ligacao);
-                //}
-
-                Usuario usuario = Usuario.Tag as Usuario;
-                //if (usuario != null)
-                //{
-                //    context.Usuarios.Attach(usuario);
-                //}
-
                 instancia.Id = Guid.NewGuid();
                 instancia.DataHora = DateTime.Now;
-                instancia.Usuario = usuario;
-                instancia.Ligacao = ligacao;
 
-                //context.HistoricosStatus.Add(instancia);
+                if (Usuario.Tag is Usuario usuario)
+                {
+                    instancia.Usuario = new Usuario {Id = usuario.Id};
+                    context.Usuarios.Attach(instancia.Usuario);
+                }
 
-                context.HistoricosStatus.Attach(instancia);
+                
+                if (LigacaoHist != null)
+                {
+                    
+                    instancia.Ligacao = new Ligacao { Id = LigacaoHist.Id };
+                    context.Ligacoes.Attach(instancia.Ligacao);
+                }
 
+                context.HistoricosStatus.Add(instancia);
                 context.SaveChanges();
                 Limpar();
             }
@@ -107,20 +109,7 @@ namespace ControleLigacoes.cadastros
 
         }
 
-        private Consulta<Ligacao> ConsultaLigacao
-        {
-            get
-            {
-                if (_consultaLigacao == null)
-                {
-                    _consultaLigacao = new Consulta<Ligacao>();
-                    _consultaLigacao.ItemSelecionado += ConsultaLigacaoItemSelecionado;
-                }
-
-                return _consultaLigacao;
-
-            }
-        }
+        
 
 
         public void ConsultaUsuarioItemSelecionado(Usuario obj)
@@ -130,13 +119,7 @@ namespace ControleLigacoes.cadastros
             Usuario.Tag = obj;
         }
 
-        public void ConsultaLigacaoItemSelecionado(Ligacao obj)
-        {
-            Ligacao.Text = obj.Codigo.ToString();
-            Ligacao.Tag = obj;
-
-        }
-
+        
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
             EnviarInfo();
@@ -148,10 +131,7 @@ namespace ControleLigacoes.cadastros
             ConsultaUsuario.Exibe();
         }
 
-        private void BtnLigacao_Click(object sender, EventArgs e)
-        {
-            ConsultaLigacao.Exibe();
-        }
+      
     }
 
 

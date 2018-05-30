@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,8 +12,10 @@ using System.Windows.Forms;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
 
+
 namespace ControleLigacoes.cadastros
 {
+
     public partial class BtStatus : Form
     {
 
@@ -32,10 +35,12 @@ namespace ControleLigacoes.cadastros
 
             if (typeof(HistoricoStatus) == typeof(HistoricoStatus))
             {
-                
+
                 CreateCells = obj =>
                 {
+
                     HistoricoStatus historicoStatus = obj as HistoricoStatus;
+
                     if (historicoStatus == null)
                     {
                         return null;
@@ -44,7 +49,8 @@ namespace ControleLigacoes.cadastros
 
                     return new object[]
                     {
-                        historicoStatus.Ligacao.Codigo, historicoStatus.DataHora, historicoStatus.Usuario.Nome,
+                        
+                        historicoStatus.Ligacao.Codigo, historicoStatus.Usuario.Nome, historicoStatus.DataHora,
                         historicoStatus.Status
                     };
                 };
@@ -56,9 +62,14 @@ namespace ControleLigacoes.cadastros
                             .Include(nameof(HistoricoStatus.Ligacao)).OfType<HistoricoStatus>().ToList();
                     }
                 };
+
             }
 
         }
+
+        private HistoricoStatus HistoricoAtual { get; set; }
+
+        
 
         public void LimparCampos()
         {
@@ -94,7 +105,7 @@ namespace ControleLigacoes.cadastros
                 MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
                 return;
             }
-
+            
 
             using (LigacoesContext context = new LigacoesContext())
             {
@@ -213,7 +224,7 @@ namespace ControleLigacoes.cadastros
             
             LigacaoAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
-            DataHora.Text = obj.DataHora.ToString("yyyy/MM/dd HH:mm:ss");
+            DataHora.Text = DateTime.Now.ToString();
             Cliente.Text = obj.Cliente.RazaoSocial;
             Cliente.Tag = obj.Cliente;
             Usuario.Text = obj.Usuario.Nome;
@@ -264,15 +275,13 @@ namespace ControleLigacoes.cadastros
             }
         }
 
-
-        
-        public HistoricoStatus Historico { get; set; }
         private Func<HistoricoStatus, object[]> CreateCells { get; set; }
         private Func<List<HistoricoStatus>> Carregar { get; set; }
 
 
         public void CarregarDados()
         {
+
             DtGvStatus.Rows.Clear();
             foreach (HistoricoStatus d in Carregar())
             {
@@ -287,7 +296,9 @@ namespace ControleLigacoes.cadastros
 
         private void BtStatus_Click(object sender, EventArgs e)
         {
+            
             CadStatus status = new CadStatus();
+            status.LigacaoHist = LigacaoAtual;
             status.ShowDialog();
             
         }
