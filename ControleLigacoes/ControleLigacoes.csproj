@@ -91,6 +91,12 @@
     <Compile Include="cadastros\CadUsuario.Designer.cs">
       <DependentUpon>CadUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadastros\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadastros\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="cadastros\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="cadastros\CadUsuario.resx">
       <DependentUpon>CadUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadastros\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cadastros\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
