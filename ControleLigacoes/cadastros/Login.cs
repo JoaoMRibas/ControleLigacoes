@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleLigacoes.dados;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,8 +20,28 @@ namespace ControleLigacoes.cadastros
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            LigacoesContext context = new LigacoesContext;
-                var usuarios = from DbSet<Usuario> Usuarios;
+
+
+            using (LigacoesContext context = new LigacoesContext())
+            {
+                var usuarios = from u in context.Usuarios
+                where u.Nome.Equals(LoginUsu) && u.Senha.Equals(SenhaUsu)
+                               select u;
+
+                if (usuarios == )
+                {
+                    MessageBox.Show("Senha ou nome de usuário estão errados, por favor tente novamente");
+                    return;
+                }
+
+                Menu menu = new Menu();
+                menu.ShowDialog();
+
+            }
+            
+            
+
+
         }
     }
 }
