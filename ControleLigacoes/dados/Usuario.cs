@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ControleLigacoes.dados
 {
@@ -10,5 +11,7 @@ namespace ControleLigacoes.dados
         public string Login { get; set; }
         public string Senha { get; set; }
         public TipoUsuario Tipo { get; set; }
+
+        
     }
 }

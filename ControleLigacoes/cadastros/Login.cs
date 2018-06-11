@@ -24,11 +24,13 @@ namespace ControleLigacoes.cadastros
 
             using (LigacoesContext context = new LigacoesContext())
             {
-                var usuarios = from u in context.Usuarios
-                where u.Nome.Equals(LoginUsu) && u.Senha.Equals(SenhaUsu)
-                               select u;
 
-                if (usuarios == )
+
+                List<Usuario> usuarios = (from Usuario in context.Usuarios
+                where Usuario.Login.Equals(LoginUsu.Text) && Usuario.Senha.Equals(SenhaUsu.Text)
+                               select Usuario).ToList();
+
+                if (!usuarios.Any())
                 {
                     MessageBox.Show("Senha ou nome de usuário estão errados, por favor tente novamente");
                     return;
