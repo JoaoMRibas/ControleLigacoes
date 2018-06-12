@@ -16,11 +16,11 @@ using ControleLigacoes.dados;
 namespace ControleLigacoes.cadastros
 {
 
-    public partial class BtStatus : Form
+    public partial class CadLigacao : Form
     {
 
 
-        public BtStatus()
+        public CadLigacao()
         {
             InitializeComponent();
             DtGvStatus.AutoGenerateColumns = true;
@@ -67,8 +67,8 @@ namespace ControleLigacoes.cadastros
 
         }
 
+        public Menu Menu { get; set; }
         private HistoricoStatus HistoricoAtual { get; set; }
-
         
 
         public void LimparCampos()
@@ -299,6 +299,7 @@ namespace ControleLigacoes.cadastros
             
             CadStatus status = new CadStatus();
             status.LigacaoHist = LigacaoAtual;
+            status.UsuarioLogado = UsuarioLogado;
             status.ShowDialog();
             
         }

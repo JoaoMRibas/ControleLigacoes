@@ -20,7 +20,6 @@ namespace ControleLigacoes.cadastros
         private Consulta<Usuario> _consultaUsuario;
         public Ligacao LigacaoHist { get; set; }
         
-        
 
         
         private CadUsuario _consulta;
@@ -31,6 +30,8 @@ namespace ControleLigacoes.cadastros
             
              
         }
+
+        public Menu Menu { get; set; }
 
         public void Inicializa()
         {
@@ -74,9 +75,9 @@ namespace ControleLigacoes.cadastros
                 instancia.Id = Guid.NewGuid();
                 instancia.DataHora = DateTime.Now;
 
-                if (Usuario.Tag is Usuario usuario)
+                if (UsuarioLogado is List<Usuario> usuario)
                 {
-                    instancia.Usuario = new Usuario {Id = usuario.Id};
+                    instancia.Usuario = new Usuario {Id = usuario};
                     context.Usuarios.Attach(instancia.Usuario);
                 }
 
@@ -94,20 +95,7 @@ namespace ControleLigacoes.cadastros
             }
         }
 
-        private Consulta<Usuario> ConsultaUsuario
-        {
-            get
-            {
-                if (_consultaUsuario == null)
-                {
-                    _consultaUsuario = new Consulta<Usuario>();
-                    _consultaUsuario.ItemSelecionado += ConsultaUsuarioItemSelecionado;
-                }
-
-                return _consultaUsuario;
-            }
-
-        }
+        
 
         
 

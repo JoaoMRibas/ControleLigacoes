@@ -1,6 +1,6 @@
 ﻿namespace ControleLigacoes.cadastros
 {
-    partial class BtStatus
+    partial class CadLigacao
     {
         /// <summary>
         /// Required designer variable.
@@ -261,7 +261,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "BtStatus";
+            this.Name = "CadLigacao";
             this.Text = "CadLigacao";
             ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).EndInit();
             this.ResumeLayout(false);

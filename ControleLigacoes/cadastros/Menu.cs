@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControleLigacoes.cadastros;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
 
@@ -14,17 +15,30 @@ namespace ControleLigacoes.cadastros
 {
     public partial class Menu : Form
     {
-        public Menu()
+        public Menu(Usuario usuario)
         {
             InitializeComponent();
-           
+            UsuarioLogado = usuario;
         }
+
+        public Usuario UsuarioLogado { get; }
+        private CadCliente CadCliente { get; set; }
+        private CadUsuario CadUsuario { get; set; }
+        private CadLigacao CadLigacao { get; set; }
 
         private void BtCadCliente_Click(object sender, EventArgs e)
         {
-            CadCliente link1 = new CadCliente();
-            link1.ShowDialog();
+
+            
+            if (CadCliente == null)
+            {
+                CadCliente = new CadCliente();
+
+            }
+
+            
         }
+    
 
         private void BtCadUsuario_Click(object sender, EventArgs e)
         {
@@ -34,7 +48,7 @@ namespace ControleLigacoes.cadastros
 
         private void BtCadLigacao_Click(object sender, EventArgs e)
         {
-            BtStatus link3 = new BtStatus();
+            CadLigacao link3 = new CadLigacao();
             link3.ShowDialog();
         }
     }

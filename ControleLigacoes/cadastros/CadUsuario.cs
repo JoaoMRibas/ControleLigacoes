@@ -12,6 +12,7 @@ using ControleLigacoes.dados;
 
 namespace ControleLigacoes.cadastros
 {
+
     public partial class CadUsuario : Form
     {
         
@@ -22,6 +23,7 @@ namespace ControleLigacoes.cadastros
 
         }
 
+        public Menu Menu { get; set; }
 
         public void Inicializa()
         {

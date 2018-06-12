@@ -23,6 +23,8 @@ namespace ControleLigacoes.cadastros
             InitializeComponent();
         }
 
+        public Menu Menu { get; set; }
+
         private void Limpar()
         {
             Codigo.Clear();

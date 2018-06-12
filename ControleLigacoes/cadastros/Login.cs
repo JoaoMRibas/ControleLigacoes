@@ -35,14 +35,16 @@ namespace ControleLigacoes.cadastros
                     MessageBox.Show("Senha ou nome de usuário estão errados, por favor tente novamente");
                     return;
                 }
+                if (usuarios.Count > 1)
+                {
+                    MessageBox.Show("Erro, mais de 1 usuário selecionado, reinicie o programa");
+                    return;
+                }
 
-                Menu menu = new Menu();
+                Menu menu = new Menu(usuarios.FirstOrDefault());
                 menu.ShowDialog();
 
             }
-            
-            
-
 
         }
     }
