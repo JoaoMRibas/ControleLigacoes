@@ -58,8 +58,9 @@ namespace ControleLigacoes.cadastros
                 {
                     using (LigacoesContext context = new LigacoesContext())
                     {
-                        return context.HistoricosStatus.Include(nameof(HistoricoStatus.Usuario))
+                        List<HistoricoStatus> list = context.HistoricosStatus.Include(nameof(HistoricoStatus.Usuario))
                             .Include(nameof(HistoricoStatus.Ligacao)).OfType<HistoricoStatus>().ToList();
+                        return list;
                     }
                 };
 
@@ -236,7 +237,7 @@ namespace ControleLigacoes.cadastros
 
 
         public Ligacao LigacaoAtual { get; set; }
-        
+        public Usuario UsuarioLogado { get; set; }
 
 
         private void BtCliente_Click(object sender, EventArgs e)

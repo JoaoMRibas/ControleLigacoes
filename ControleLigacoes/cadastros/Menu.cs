@@ -21,35 +21,66 @@ namespace ControleLigacoes.cadastros
             UsuarioLogado = usuario;
         }
 
-        public Usuario UsuarioLogado { get; }
+        public Usuario UsuarioLogado  { get; }
         private CadCliente CadCliente { get; set; }
         private CadUsuario CadUsuario { get; set; }
         private CadLigacao CadLigacao { get; set; }
 
-        private void BtCadCliente_Click(object sender, EventArgs e)
-        {
 
-            
+        private void IniciaCadCliente()
+        {
             if (CadCliente == null)
             {
                 CadCliente = new CadCliente();
+                CadCliente.ShowDialog();
 
             }
 
+            return;
+
+        }
+
+        private void IniciaCadUsuario()
+        {
             
+            
+            if (CadUsuario == null)
+            {
+                CadUsuario = new CadUsuario();
+                CadUsuario.ShowDialog();
+            }
+
+            return;
+
+        }
+
+        private void IniciaCadLigacao()
+        {
+            if (CadLigacao == null)
+            {
+
+                CadLigacao = new CadLigacao();
+                CadLigacao.UsuarioLogado = UsuarioLogado;
+                CadLigacao.ShowDialog();
+
+            }
+            return;
+        }
+
+        private void BtCadCliente_Click(object sender, EventArgs e)
+        {
+            IniciaCadCliente();
         }
     
 
         private void BtCadUsuario_Click(object sender, EventArgs e)
         {
-            CadUsuario link2 = new CadUsuario();
-            link2.ShowDialog();
+            IniciaCadUsuario();
         }
 
         private void BtCadLigacao_Click(object sender, EventArgs e)
         {
-            CadLigacao link3 = new CadLigacao();
-            link3.ShowDialog();
+            IniciaCadLigacao();
         }
     }
 }

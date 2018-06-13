@@ -19,7 +19,7 @@ namespace ControleLigacoes.cadastros
     {
         private Consulta<Usuario> _consultaUsuario;
         public Ligacao LigacaoHist { get; set; }
-        
+        public Usuario UsuarioLogado { get; set; }
 
         
         private CadUsuario _consulta;
@@ -49,7 +49,6 @@ namespace ControleLigacoes.cadastros
         public void Limpar()
         {
             OpcaoStatus.SelectedItem = null;
-            Usuario.Clear();
         }
 
         
@@ -75,9 +74,9 @@ namespace ControleLigacoes.cadastros
                 instancia.Id = Guid.NewGuid();
                 instancia.DataHora = DateTime.Now;
 
-                if (UsuarioLogado is List<Usuario> usuario)
+                if (UsuarioLogado is Usuario usuario)
                 {
-                    instancia.Usuario = new Usuario {Id = usuario};
+                    instancia.Usuario = new Usuario {Id = usuario.Id};
                     context.Usuarios.Attach(instancia.Usuario);
                 }
 
@@ -94,33 +93,13 @@ namespace ControleLigacoes.cadastros
                 Limpar();
             }
         }
-
-        
-
-        
-
-
-        public void ConsultaUsuarioItemSelecionado(Usuario obj)
-        {
-
-            Usuario.Text = obj.Nome;
-            Usuario.Tag = obj;
-        }
-
-        
+ 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
             EnviarInfo();
             Limpar();
         }
-
-        private void BtUsuario_Click(object sender, EventArgs e)
-        {
-            ConsultaUsuario.Exibe();
-        }
-
-      
+        
     }
-
 
 }
