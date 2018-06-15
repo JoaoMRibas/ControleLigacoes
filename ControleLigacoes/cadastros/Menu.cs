@@ -36,7 +36,12 @@ namespace ControleLigacoes.cadastros
 
             }
 
-            return;
+            else
+            {
+                CadCliente = CadCliente;
+                CadCliente.ShowDialog();
+            }
+
 
         }
 
@@ -50,7 +55,13 @@ namespace ControleLigacoes.cadastros
                 CadUsuario.ShowDialog();
             }
 
-            return;
+            else
+            {
+                CadUsuario = CadUsuario;
+                CadUsuario.ShowDialog();
+            }
+
+            
 
         }
 
@@ -64,7 +75,14 @@ namespace ControleLigacoes.cadastros
                 CadLigacao.ShowDialog();
 
             }
-            return;
+
+            else
+            {
+                CadLigacao = CadLigacao;
+                CadLigacao.UsuarioLogado = UsuarioLogado;
+                CadLigacao.ShowDialog();
+            }
+
         }
 
         private void BtCadCliente_Click(object sender, EventArgs e)

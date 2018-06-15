@@ -88,16 +88,22 @@ namespace ControleLigacoes.cadastros
                     context.Ligacoes.Attach(instancia.Ligacao);
                 }
 
+                if (LigacaoHist == null)
+                {
+                    MessageBox.Show("Selecione uma ligação antes de salvar o status.");
+                    return;
+                }
                 context.HistoricosStatus.Add(instancia);
                 context.SaveChanges();
                 Limpar();
+                Close();
+                
             }
         }
  
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
             EnviarInfo();
-            Limpar();
         }
         
     }

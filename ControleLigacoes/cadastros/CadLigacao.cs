@@ -297,12 +297,12 @@ namespace ControleLigacoes.cadastros
 
         private void BtStatus_Click(object sender, EventArgs e)
         {
-            
+
             CadStatus status = new CadStatus();
-            status.LigacaoHist = LigacaoAtual;
             status.UsuarioLogado = UsuarioLogado;
+            status.LigacaoHist = LigacaoAtual;
             status.ShowDialog();
-            
+            CarregarDados();
         }
     }
 }
