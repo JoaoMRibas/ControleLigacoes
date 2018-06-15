@@ -68,11 +68,6 @@ namespace ControleLigacoes.cadastros
 
         public void EnviarInfo()
         {
-            if (!int.TryParse(Codigo.Text, out int cod))
-            {
-                MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
-                return;
-            }
 
             if (!Enum.TryParse(Tipo.Text, out TipoUsuario tipo) || !Enum.IsDefined(typeof(TipoUsuario), tipo))
             {
@@ -103,7 +98,7 @@ namespace ControleLigacoes.cadastros
                     instancia.Id = Guid.NewGuid();
                 }
 
-                instancia.Codigo = cod;
+                instancia.Codigo = 1;
                 instancia.Nome = Nome.Text;
                 instancia.Login = Login.Text;
                 instancia.Senha = Senha.Text;

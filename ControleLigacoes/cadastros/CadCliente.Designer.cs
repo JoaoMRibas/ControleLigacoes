@@ -104,6 +104,7 @@
             // 
             this.Codigo.Location = new System.Drawing.Point(96, 30);
             this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
             this.Codigo.Size = new System.Drawing.Size(100, 20);
             this.Codigo.TabIndex = 6;
             // 

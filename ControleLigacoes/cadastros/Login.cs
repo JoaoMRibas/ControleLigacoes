@@ -16,6 +16,26 @@ namespace ControleLigacoes.cadastros
         public Login()
         {
             InitializeComponent();
+            LoginUsu.KeyPress += LoginUsu_KeyPress;
+            SenhaUsu.KeyPress += SenhaUsu_KeyPress;
+        }
+
+        private void SenhaUsu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
+        private void LoginUsu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (e.KeyChar == 13)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)

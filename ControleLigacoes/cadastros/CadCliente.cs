@@ -54,11 +54,6 @@ namespace ControleLigacoes.cadastros
         private void EnviarInfoCliente()
         {
 
-            if (!int.TryParse(Codigo.Text, out int cod))
-            {
-                MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
-                return;
-            }
 
             string cnpj = Cnpj.Text;
             
@@ -95,7 +90,7 @@ namespace ControleLigacoes.cadastros
                     instancia.Id = Guid.NewGuid();
                 }
 
-                instancia.Codigo = cod;
+                instancia.Codigo = 1;
                 instancia.RazaoSocial = RazaoSocial.Text;
                 instancia.NomeFantasia = NomeFantasia.Text;
                 instancia.Cnpj = cnpj;

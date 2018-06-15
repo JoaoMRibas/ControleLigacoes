@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Codigo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,23 +40,9 @@
             this.Tipo = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Codigo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // Codigo
-            // 
-            this.Codigo.Location = new System.Drawing.Point(49, 23);
-            this.Codigo.Name = "Codigo";
-            this.Codigo.Size = new System.Drawing.Size(100, 20);
-            this.Codigo.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Código:";
             // 
             // label2
             // 
@@ -165,6 +149,23 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Código:";
+            // 
+            // Codigo
+            // 
+            this.Codigo.Location = new System.Drawing.Point(49, 23);
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Size = new System.Drawing.Size(100, 20);
+            this.Codigo.TabIndex = 0;
+            // 
             // CadUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,9 +193,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox Codigo;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -208,5 +206,7 @@
         private System.Windows.Forms.ComboBox OpcaoStatus;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox Codigo;
     }
 }

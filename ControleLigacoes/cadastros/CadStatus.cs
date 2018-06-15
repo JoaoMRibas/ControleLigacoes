@@ -26,9 +26,7 @@ namespace ControleLigacoes.cadastros
         public CadStatus()
         {
             InitializeComponent();
-            Inicializa();
-            
-             
+            Inicializa();    
         }
 
         public Menu Menu { get; set; }
@@ -91,8 +89,11 @@ namespace ControleLigacoes.cadastros
                 if (LigacaoHist == null)
                 {
                     MessageBox.Show("Selecione uma ligação antes de salvar o status.");
+                    Limpar();
+                    Close();
                     return;
                 }
+
                 context.HistoricosStatus.Add(instancia);
                 context.SaveChanges();
                 Limpar();

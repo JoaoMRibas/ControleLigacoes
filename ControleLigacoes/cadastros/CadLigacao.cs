@@ -76,11 +76,9 @@ namespace ControleLigacoes.cadastros
         {
             Codigo.Clear();
             DataHora.Clear();
-            Usuario.Clear();
             Cliente.Clear();
             Observacoes.Clear();
             LigacaoAtual = null;
-            Usuario.Tag = null;
             Cliente.Tag = null;
         }
 
@@ -101,11 +99,6 @@ namespace ControleLigacoes.cadastros
 
         public void EnviarInfo()
         {
-            if (!int.TryParse(Codigo.Text, out int cod))
-            {
-                MessageBox.Show("Não foi possível salvar a informação, pois o campo código não permite letras");
-                return;
-            }
             
 
             using (LigacoesContext context = new LigacoesContext())
@@ -125,8 +118,12 @@ namespace ControleLigacoes.cadastros
 
                 }
 
-                instancia.Codigo = cod;
-                instancia.Usuario = Usuario.Tag as Usuario;
+                instancia.Codigo = 1;
+                if (UsuarioLogado is Usuario usuario)
+                {
+                    instancia.Usuario = new Usuario { Id = usuario.Id };
+                    context.Usuarios.Attach(instancia.Usuario);
+                }
                 instancia.Cliente = Cliente.Tag as Cliente;
                 instancia.DataHora = DateTime.Now;
                 instancia.Observacoes = Observacoes.Text;
@@ -175,20 +172,7 @@ namespace ControleLigacoes.cadastros
             }
         }
 
-        private Consulta<Usuario> ConsultaUsuario
-        {
-            get
-            {
-                if (_consultaUsuario == null)
-                {
-                    _consultaUsuario = new Consulta<Usuario>();
-                    _consultaUsuario.ItemSelecionado += ConsultaUsuarioItemSelecionado;
-                }
-
-                return _consultaUsuario;
-            }
-
-        }
+        
 
         private Consulta<Cliente> ConsultaCliente
         {
@@ -203,13 +187,6 @@ namespace ControleLigacoes.cadastros
                 return _consultaCliente;
             }
 
-        }
-
-        public void ConsultaUsuarioItemSelecionado(Usuario obj)
-        {
-
-            Usuario.Text = obj.Nome;
-            Usuario.Tag = obj;
         }
 
         public void ConsultaClienteItemSelecionado(Cliente obj)
@@ -227,9 +204,7 @@ namespace ControleLigacoes.cadastros
             Codigo.Text = obj.Codigo.ToString();
             DataHora.Text = DateTime.Now.ToString();
             Cliente.Text = obj.Cliente.RazaoSocial;
-            Cliente.Tag = obj.Cliente;
-            Usuario.Text = obj.Usuario.Nome;
-            Usuario.Tag = obj.Usuario;            
+            Cliente.Tag = obj.Cliente;         
             Observacoes.Text = obj.Observacoes;
             CarregarDados();
  
@@ -245,10 +220,6 @@ namespace ControleLigacoes.cadastros
             ConsultaCliente.Exibe();
         }
 
-        private void BtUsuario_Click(object sender, EventArgs e)
-        {
-            ConsultaUsuario.Exibe();
-        }
 
         private void BtPesquisar_Click(object sender, EventArgs e)
         {
@@ -302,7 +273,12 @@ namespace ControleLigacoes.cadastros
             status.UsuarioLogado = UsuarioLogado;
             status.LigacaoHist = LigacaoAtual;
             status.ShowDialog();
+            if (status.LigacaoHist == null)
+            {
+                return;
+            }
             CarregarDados();
+
         }
     }
 }
