@@ -54,7 +54,7 @@ namespace ControleLigacoes.cadastros
         private void EnviarInfoCliente()
         {
 
-
+            
             string cnpj = Cnpj.Text;
             
             if (cnpj.Length != 14)
@@ -75,8 +75,11 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
+            
             using (LigacoesContext context = new LigacoesContext())
             {
+                int i = ;
+                int codigo = i++;
 
                 Cliente instancia = ClienteAtual == null
                     ? null
@@ -90,7 +93,7 @@ namespace ControleLigacoes.cadastros
                     instancia.Id = Guid.NewGuid();
                 }
 
-                instancia.Codigo = 1;
+                instancia.Codigo = codigo;
                 instancia.RazaoSocial = RazaoSocial.Text;
                 instancia.NomeFantasia = NomeFantasia.Text;
                 instancia.Cnpj = cnpj;
