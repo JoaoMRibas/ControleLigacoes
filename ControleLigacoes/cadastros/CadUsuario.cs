@@ -98,7 +98,6 @@ namespace ControleLigacoes.cadastros
                     instancia.Id = Guid.NewGuid();
                 }
 
-                instancia.Codigo = 1;
                 instancia.Nome = Nome.Text;
                 instancia.Login = Login.Text;
                 instancia.Senha = Senha.Text;
@@ -223,7 +222,7 @@ namespace ControleLigacoes.cadastros
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ConsultaUsuario.Exibe();
+            ConsultaUsuario.Exibe();   
         }
 
         private void button5_Click(object sender, EventArgs e)

@@ -66,7 +66,7 @@
             this.label2.Location = new System.Drawing.Point(9, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Data e Hora:";
             // 
             // label3
@@ -75,7 +75,7 @@
             this.label3.Location = new System.Drawing.Point(9, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Cliente:";
             // 
             // label5
@@ -84,7 +84,7 @@
             this.label5.Location = new System.Drawing.Point(9, 112);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 7;
             this.label5.Text = "Observações:";
             // 
             // Codigo
@@ -93,7 +93,7 @@
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
             this.Codigo.Size = new System.Drawing.Size(100, 20);
-            this.Codigo.TabIndex = 5;
+            this.Codigo.TabIndex = 1;
             // 
             // DataHora
             // 
@@ -101,7 +101,7 @@
             this.DataHora.Name = "DataHora";
             this.DataHora.ReadOnly = true;
             this.DataHora.Size = new System.Drawing.Size(100, 20);
-            this.DataHora.TabIndex = 6;
+            this.DataHora.TabIndex = 3;
             // 
             // Cliente
             // 
@@ -109,14 +109,14 @@
             this.Cliente.Name = "Cliente";
             this.Cliente.ReadOnly = true;
             this.Cliente.Size = new System.Drawing.Size(100, 20);
-            this.Cliente.TabIndex = 7;
+            this.Cliente.TabIndex = 5;
             // 
             // Observacoes
             // 
             this.Observacoes.Location = new System.Drawing.Point(83, 105);
             this.Observacoes.Name = "Observacoes";
             this.Observacoes.Size = new System.Drawing.Size(100, 20);
-            this.Observacoes.TabIndex = 9;
+            this.Observacoes.TabIndex = 8;
             // 
             // BtLimpar
             // 
@@ -163,7 +163,7 @@
             this.BtCliente.Location = new System.Drawing.Point(189, 79);
             this.BtCliente.Name = "BtCliente";
             this.BtCliente.Size = new System.Drawing.Size(30, 20);
-            this.BtCliente.TabIndex = 14;
+            this.BtCliente.TabIndex = 6;
             this.BtCliente.Text = "PC";
             this.BtCliente.UseVisualStyleBackColor = true;
             this.BtCliente.Click += new System.EventHandler(this.BtCliente_Click);
@@ -179,7 +179,7 @@
             this.DtGvStatus.Location = new System.Drawing.Point(246, 12);
             this.DtGvStatus.Name = "DtGvStatus";
             this.DtGvStatus.Size = new System.Drawing.Size(452, 333);
-            this.DtGvStatus.TabIndex = 16;
+            this.DtGvStatus.TabIndex = 14;
             // 
             // Ligacao
             // 
@@ -206,7 +206,7 @@
             this.button1.Location = new System.Drawing.Point(12, 142);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 23);
-            this.button1.TabIndex = 17;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Add Status";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.BtStatus_Click);

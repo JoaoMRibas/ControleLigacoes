@@ -132,21 +132,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="LigacaoAtual\Assembly.cs" />
-    <Compile Include="Migrations\201805091433190_InitialCreate.cs" />
-    <Compile Include="Migrations\201805091433190_InitialCreate.Designer.cs">
-      <DependentUpon>201805091433190_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805111240007_ligacoesUsuario.cs" />
-    <Compile Include="Migrations\201805111240007_ligacoesUsuario.Designer.cs">
-      <DependentUpon>201805111240007_ligacoesUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805151232441_Delete.cs" />
-    <Compile Include="Migrations\201805151232441_Delete.Designer.cs">
-      <DependentUpon>201805151232441_Delete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805151437170_Status.cs" />
-    <Compile Include="Migrations\201805151437170_Status.Designer.cs">
-      <DependentUpon>201805151437170_Status.cs</DependentUpon>
+    <Compile Include="Migrations\201806191434452_Initial.cs" />
+    <Compile Include="Migrations\201806191434452_Initial.Designer.cs">
+      <DependentUpon>201806191434452_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -178,17 +166,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805091433190_InitialCreate.resx">
-      <DependentUpon>201805091433190_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805111240007_ligacoesUsuario.resx">
-      <DependentUpon>201805111240007_ligacoesUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805151232441_Delete.resx">
-      <DependentUpon>201805151232441_Delete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805151437170_Status.resx">
-      <DependentUpon>201805151437170_Status.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806191434452_Initial.resx">
+      <DependentUpon>201806191434452_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -28,7 +28,7 @@ namespace ControleLigacoes.cadastros
         {
             if (e.KeyChar == (char) Keys.Enter)
             {
-                Loginn();
+                Logar();
             }
         }
 
@@ -37,6 +37,7 @@ namespace ControleLigacoes.cadastros
         {
 
             if (e.KeyChar == Convert.ToChar(13))
+
             {
                 e.Handled = true;
                 SendKeys.Send("{TAB}");
@@ -44,15 +45,17 @@ namespace ControleLigacoes.cadastros
 
         }
 
-        private void Loginn()
+        private void Logar()
         {
+            Usuario usuario = null;
+
             using (LigacoesContext context = new LigacoesContext())
             {
 
 
-                List<Usuario> usuarios = (from Usuario in context.Usuarios
-                    where Usuario.Login.Equals(LoginUsu.Text) && Usuario.Senha.Equals(SenhaUsu.Text)
-                    select Usuario).ToList();
+                List<Usuario> usuarios = (from us in context.Usuarios
+                    where us.Login.Equals(LoginUsu.Text) && us.Senha.Equals(SenhaUsu.Text)
+                    select us).ToList();
 
                 if (!usuarios.Any())
                 {
@@ -66,16 +69,18 @@ namespace ControleLigacoes.cadastros
                     return;
                 }
 
-                Menu menu = new Menu(usuarios.FirstOrDefault());
-                menu.ShowDialog();
+                usuario = usuarios.FirstOrDefault();
 
             }
+
+            Menu menu = new Menu(usuario);
+            menu.ShowDialog();
         }
 
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Loginn();
+            Logar();
         }
     }
 }

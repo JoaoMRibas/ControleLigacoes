@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControleLigacoes.dados
 {
     public class Usuario
     {
         public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Codigo { get; set; }
         public string Nome { get; set; }
         public string Login { get; set; }

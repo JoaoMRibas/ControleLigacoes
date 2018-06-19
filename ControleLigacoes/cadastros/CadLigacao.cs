@@ -66,7 +66,11 @@ namespace ControleLigacoes.cadastros
 
             }
 
+            Cliente.KeyPress += Cliente_KeyPress;
+
         }
+
+        
 
         public Menu Menu { get; set; }
         private HistoricoStatus HistoricoAtual { get; set; }
@@ -155,6 +159,14 @@ namespace ControleLigacoes.cadastros
 
             LimparCampos();
 
+        }
+
+        private void Cliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ConsultaCliente.Exibe();
+            }
         }
 
         private Consulta<Ligacao> ConsultaLigacao

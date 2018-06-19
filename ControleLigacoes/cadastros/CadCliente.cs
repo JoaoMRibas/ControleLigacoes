@@ -54,9 +54,9 @@ namespace ControleLigacoes.cadastros
         private void EnviarInfoCliente()
         {
 
-            
+
             string cnpj = Cnpj.Text;
-            
+
             if (cnpj.Length != 14)
             {
                 MessageBox.Show("Não foi possível salvar a informação, pois o campo Cnpj deve conter 14 dígitos");
@@ -75,11 +75,9 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-            
+
             using (LigacoesContext context = new LigacoesContext())
             {
-                int i = ;
-                int codigo = i++;
 
                 Cliente instancia = ClienteAtual == null
                     ? null
@@ -93,24 +91,25 @@ namespace ControleLigacoes.cadastros
                     instancia.Id = Guid.NewGuid();
                 }
 
-                instancia.Codigo = codigo;
                 instancia.RazaoSocial = RazaoSocial.Text;
                 instancia.NomeFantasia = NomeFantasia.Text;
                 instancia.Cnpj = cnpj;
                 instancia.Email = Email.Text;
                 instancia.Telefone = Telefone.Text;
 
-                if (isInsert)
                 {
-                    context.Clientes.Add(instancia);
+                    if (isInsert)
+                    {
+                        context.Clientes.Add(instancia);
+                    }
+
+                    context.SaveChanges();
+
                 }
 
-                context.SaveChanges();
+                Limpar();
 
             }
-
-            Limpar();
-
         }
 
         public void interfaceUsuario()

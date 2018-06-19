@@ -41,7 +41,7 @@
             this.BtnLogin.Location = new System.Drawing.Point(160, 239);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(100, 27);
-            this.BtnLogin.TabIndex = 0;
+            this.BtnLogin.TabIndex = 5;
             this.BtnLogin.Text = "Efetuar login";
             this.BtnLogin.UseVisualStyleBackColor = true;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
@@ -51,7 +51,7 @@
             this.LoginUsu.Location = new System.Drawing.Point(160, 151);
             this.LoginUsu.Name = "LoginUsu";
             this.LoginUsu.Size = new System.Drawing.Size(100, 20);
-            this.LoginUsu.TabIndex = 1;
+            this.LoginUsu.TabIndex = 2;
             // 
             // SenhaUsu
             // 
@@ -59,7 +59,7 @@
             this.SenhaUsu.Name = "SenhaUsu";
             this.SenhaUsu.PasswordChar = '*';
             this.SenhaUsu.Size = new System.Drawing.Size(100, 20);
-            this.SenhaUsu.TabIndex = 2;
+            this.SenhaUsu.TabIndex = 4;
             // 
             // label1
             // 
@@ -68,7 +68,7 @@
             this.label1.Location = new System.Drawing.Point(99, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Login:";
             // 
             // label2
@@ -78,7 +78,7 @@
             this.label2.Location = new System.Drawing.Point(99, 206);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Senha:";
             // 
             // label3
@@ -88,7 +88,7 @@
             this.label3.Location = new System.Drawing.Point(68, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(267, 27);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 0;
             this.label3.Text = "CONTROLE LIGAÇÕES";
             // 
             // Login

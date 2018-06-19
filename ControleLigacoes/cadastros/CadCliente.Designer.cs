@@ -61,7 +61,7 @@
             this.label2.Location = new System.Drawing.Point(8, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Razão Social";
             // 
             // label3
@@ -70,7 +70,7 @@
             this.label3.Location = new System.Drawing.Point(8, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Nome Fantasia";
             // 
             // label4
@@ -79,7 +79,7 @@
             this.label4.Location = new System.Drawing.Point(12, 122);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 13);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 6;
             this.label4.Text = "Cnpj";
             // 
             // label5
@@ -88,7 +88,7 @@
             this.label5.Location = new System.Drawing.Point(8, 149);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 8;
             this.label5.Text = "Telefone";
             // 
             // label6
@@ -97,7 +97,7 @@
             this.label6.Location = new System.Drawing.Point(12, 171);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 5;
+            this.label6.TabIndex = 10;
             this.label6.Text = "E-mail";
             // 
             // Codigo
@@ -106,35 +106,35 @@
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
             this.Codigo.Size = new System.Drawing.Size(100, 20);
-            this.Codigo.TabIndex = 6;
+            this.Codigo.TabIndex = 1;
             // 
             // RazaoSocial
             // 
             this.RazaoSocial.Location = new System.Drawing.Point(96, 56);
             this.RazaoSocial.Name = "RazaoSocial";
             this.RazaoSocial.Size = new System.Drawing.Size(100, 20);
-            this.RazaoSocial.TabIndex = 7;
+            this.RazaoSocial.TabIndex = 3;
             // 
             // NomeFantasia
             // 
             this.NomeFantasia.Location = new System.Drawing.Point(96, 89);
             this.NomeFantasia.Name = "NomeFantasia";
             this.NomeFantasia.Size = new System.Drawing.Size(100, 20);
-            this.NomeFantasia.TabIndex = 8;
+            this.NomeFantasia.TabIndex = 5;
             // 
             // Cnpj
             // 
             this.Cnpj.Location = new System.Drawing.Point(95, 115);
             this.Cnpj.Name = "Cnpj";
             this.Cnpj.Size = new System.Drawing.Size(101, 20);
-            this.Cnpj.TabIndex = 9;
+            this.Cnpj.TabIndex = 7;
             // 
             // Telefone
             // 
             this.Telefone.Location = new System.Drawing.Point(95, 142);
             this.Telefone.Name = "Telefone";
             this.Telefone.Size = new System.Drawing.Size(100, 20);
-            this.Telefone.TabIndex = 10;
+            this.Telefone.TabIndex = 9;
             // 
             // Email
             // 
@@ -168,7 +168,7 @@
             this.button3.Location = new System.Drawing.Point(118, 234);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(76, 34);
-            this.button3.TabIndex = 14;
+            this.button3.TabIndex = 15;
             this.button3.Text = "Apagar Registro";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -178,7 +178,7 @@
             this.button4.Location = new System.Drawing.Point(11, 235);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 34);
-            this.button4.TabIndex = 15;
+            this.button4.TabIndex = 14;
             this.button4.Text = "Visualizar Registros";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);

@@ -93,7 +93,7 @@ namespace ControleLigacoes.cadastros
 
         private void BtCadUsuario_Click(object sender, EventArgs e)
         {
-            if (UsuarioLogado.Tipo != TipoUsuario.Admin)
+            if (!TipoUsuario.Admin.Equals(UsuarioLogado.Tipo))
             {
                 MessageBox.Show("Somente administradores tem permissão para adicionar usuários.");
                 return;

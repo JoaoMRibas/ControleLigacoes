@@ -59,7 +59,7 @@
             this.label3.Location = new System.Drawing.Point(-1, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Login:";
             // 
             // label4
@@ -68,7 +68,7 @@
             this.label4.Location = new System.Drawing.Point(-1, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 6;
             this.label4.Text = "Senha:";
             // 
             // label5
@@ -77,7 +77,7 @@
             this.label5.Location = new System.Drawing.Point(0, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
-            this.label5.TabIndex = 5;
+            this.label5.TabIndex = 8;
             this.label5.Text = "Tipo:";
             // 
             // Nome
@@ -85,28 +85,29 @@
             this.Nome.Location = new System.Drawing.Point(49, 60);
             this.Nome.Name = "Nome";
             this.Nome.Size = new System.Drawing.Size(100, 20);
-            this.Nome.TabIndex = 6;
+            this.Nome.TabIndex = 3;
             // 
             // Login
             // 
             this.Login.Location = new System.Drawing.Point(49, 93);
             this.Login.Name = "Login";
             this.Login.Size = new System.Drawing.Size(100, 20);
-            this.Login.TabIndex = 6;
+            this.Login.TabIndex = 5;
             // 
             // Senha
             // 
             this.Senha.Location = new System.Drawing.Point(49, 133);
             this.Senha.Name = "Senha";
+            this.Senha.PasswordChar = '*';
             this.Senha.Size = new System.Drawing.Size(100, 20);
-            this.Senha.TabIndex = 6;
+            this.Senha.TabIndex = 7;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(4, 226);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 22);
-            this.button1.TabIndex = 7;
+            this.button1.TabIndex = 10;
             this.button1.Text = "Limpar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -116,7 +117,7 @@
             this.button2.Location = new System.Drawing.Point(88, 226);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 22);
-            this.button2.TabIndex = 8;
+            this.button2.TabIndex = 11;
             this.button2.Text = "Salvar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -134,7 +135,7 @@
             this.button3.Location = new System.Drawing.Point(5, 253);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(77, 35);
-            this.button3.TabIndex = 10;
+            this.button3.TabIndex = 12;
             this.button3.Text = "Visualizar Registros";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -144,7 +145,7 @@
             this.button5.Location = new System.Drawing.Point(88, 254);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(84, 34);
-            this.button5.TabIndex = 12;
+            this.button5.TabIndex = 13;
             this.button5.Text = "Apagar Registro";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -155,7 +156,7 @@
             this.label1.Location = new System.Drawing.Point(0, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Código:";
             // 
             // Codigo
@@ -164,7 +165,7 @@
             this.Codigo.Name = "Codigo";
             this.Codigo.ReadOnly = true;
             this.Codigo.Size = new System.Drawing.Size(100, 20);
-            this.Codigo.TabIndex = 0;
+            this.Codigo.TabIndex = 1;
             // 
             // CadUsuario
             // 
