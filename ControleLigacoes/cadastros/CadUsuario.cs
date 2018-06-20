@@ -66,6 +66,7 @@ namespace ControleLigacoes.cadastros
         public TextWriter arquivo;
         private Consulta<Usuario> _consulta;
 
+
         public void EnviarInfo()
         {
 

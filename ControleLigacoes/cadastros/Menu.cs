@@ -69,7 +69,7 @@ namespace ControleLigacoes.cadastros
         {
             if (CadLigacao == null)
             {
-
+                
                 CadLigacao = new CadLigacao();
                 CadLigacao.UsuarioLogado = UsuarioLogado;
                 CadLigacao.ShowDialog();
@@ -78,6 +78,7 @@ namespace ControleLigacoes.cadastros
 
             else
             {
+               
                 CadLigacao = CadLigacao;
                 CadLigacao.UsuarioLogado = UsuarioLogado;
                 CadLigacao.ShowDialog();

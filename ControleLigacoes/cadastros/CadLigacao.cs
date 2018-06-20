@@ -122,7 +122,7 @@ namespace ControleLigacoes.cadastros
 
                 }
 
-                instancia.Codigo = 1;
+                
                 if (UsuarioLogado is Usuario usuario)
                 {
                     instancia.Usuario = new Usuario { Id = usuario.Id };
@@ -214,7 +214,7 @@ namespace ControleLigacoes.cadastros
             
             LigacaoAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
-            DataHora.Text = DateTime.Now.ToString();
+            DataHora.Text = obj.DataHora.ToString();
             Cliente.Text = obj.Cliente.RazaoSocial;
             Cliente.Tag = obj.Cliente;         
             Observacoes.Text = obj.Observacoes;

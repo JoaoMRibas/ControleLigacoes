@@ -73,8 +73,11 @@ namespace ControleLigacoes.cadastros
 
             }
 
+            LoginUsu.Clear();
+            SenhaUsu.Clear();
             Menu menu = new Menu(usuario);
             menu.ShowDialog();
+            
         }
 
 
