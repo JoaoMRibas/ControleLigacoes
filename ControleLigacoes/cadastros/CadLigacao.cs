@@ -58,7 +58,9 @@ namespace ControleLigacoes.cadastros
                 {
                     using (LigacoesContext context = new LigacoesContext())
                     {
-                        List<HistoricoStatus> list = context.HistoricosStatus.Include(nameof(HistoricoStatus.Usuario))
+                        List<HistoricoStatus> list = (from lig in context.HistoricosStatus
+                            where LigacaoAtual.Codigo == Historico.Ligacao.Codigo  
+                            select lig).Include(nameof(HistoricoStatus.Usuario))
                             .Include(nameof(HistoricoStatus.Ligacao)).OfType<HistoricoStatus>().ToList();
                         return list;
                     }
@@ -73,7 +75,7 @@ namespace ControleLigacoes.cadastros
         
 
         public Menu Menu { get; set; }
-        private HistoricoStatus HistoricoAtual { get; set; }
+        private HistoricoStatus Historico { get; set; }
         
 
         public void LimparCampos()
@@ -84,6 +86,7 @@ namespace ControleLigacoes.cadastros
             Observacoes.Clear();
             LigacaoAtual = null;
             Cliente.Tag = null;
+            DtGvStatus.Rows.Clear();
         }
 
         private void BtLimpar_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace ControleLigacoes.cadastros
 
                 }
 
-                
+
                 if (UsuarioLogado is Usuario usuario)
                 {
                     instancia.Usuario = new Usuario { Id = usuario.Id };
@@ -131,9 +134,6 @@ namespace ControleLigacoes.cadastros
                 instancia.Cliente = Cliente.Tag as Cliente;
                 instancia.DataHora = DateTime.Now;
                 instancia.Observacoes = Observacoes.Text;
-
-
-
 
                 if (instancia.Cliente != null)
                 {
@@ -144,9 +144,6 @@ namespace ControleLigacoes.cadastros
                 {
                     context.Usuarios.Attach(instancia.Usuario);
                 }
-
-                context.Ligacoes.Attach(instancia);
-                
 
                 if (isInsert)
                 {
