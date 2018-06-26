@@ -18,7 +18,7 @@ namespace ControleLigacoes.cadastros
 
     public partial class CadLigacao : Form
     {
-
+        private HistoricoStatus Historico { get; set; }
 
         public CadLigacao()
         {
@@ -54,14 +54,15 @@ namespace ControleLigacoes.cadastros
                         historicoStatus.Status
                     };
                 };
-                Carregar = () =>
+                Carregar = () => 
                 {
                     using (LigacoesContext context = new LigacoesContext())
                     {
-                        List<HistoricoStatus> list = (from lig in context.HistoricosStatus
-                            where LigacaoAtual.Codigo == Historico.Ligacao.Codigo  
-                            select lig).Include(nameof(HistoricoStatus.Usuario))
-                            .Include(nameof(HistoricoStatus.Ligacao)).OfType<HistoricoStatus>().ToList();
+
+                        List<HistoricoStatus> list = (from hs in context.HistoricosStatus
+                            where LigacaoAtual.Id.Equals(hs.Ligacao.Id)
+                            select hs).Include(nameof(HistoricoStatus.Usuario))
+                            .Include(nameof(HistoricoStatus.Ligacao)).ToList();
                         return list;
                     }
                 };
@@ -75,8 +76,8 @@ namespace ControleLigacoes.cadastros
         
 
         public Menu Menu { get; set; }
-        private HistoricoStatus Historico { get; set; }
         
+
 
         public void LimparCampos()
         {
@@ -208,7 +209,7 @@ namespace ControleLigacoes.cadastros
 
         public void ConsultaLigacaoItemSelecionado(Ligacao obj)
         {
-            
+;
             LigacaoAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
             DataHora.Text = obj.DataHora.ToString();

@@ -4,11 +4,15 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
+using System.Text;
+using ControleLigacoes.dados.password;
+
 
 namespace ControleLigacoes.cadastros
 {
@@ -66,9 +70,12 @@ namespace ControleLigacoes.cadastros
         public TextWriter arquivo;
         private Consulta<Usuario> _consulta;
 
+        
+
 
         public void EnviarInfo()
         {
+            
 
             if (!Enum.TryParse(Tipo.Text, out TipoUsuario tipo) || !Enum.IsDefined(typeof(TipoUsuario), tipo))
             {
@@ -101,7 +108,10 @@ namespace ControleLigacoes.cadastros
 
                 instancia.Nome = Nome.Text;
                 instancia.Login = Login.Text;
-                instancia.Senha = Senha.Text;
+                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+                HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt(Senha.Text, 64, SHA512.Create());
+                instancia.HashSenha = hashResultSha512.Digest;
+                instancia.HashSalt = hashResultSha512.Salt;
                 instancia.Tipo = tipo;
 
                 if (isInsert)
@@ -216,7 +226,7 @@ namespace ControleLigacoes.cadastros
             Codigo.Text = obj.Codigo.ToString();
             Nome.Text = obj.Nome;
             Login.Text = obj.Login;
-            Senha.Text = obj.Senha;
+            Senha.Text = obj.HashSenha;
             Tipo.SelectedItem = obj.Tipo;
 
         }

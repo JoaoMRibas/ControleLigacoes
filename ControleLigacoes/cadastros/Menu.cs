@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControleLigacoes.cadastros;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
+using ControleLigacoes.dados.password;
 
 namespace ControleLigacoes.cadastros
 {
@@ -19,6 +21,7 @@ namespace ControleLigacoes.cadastros
         {
             InitializeComponent();
             UsuarioLogado = usuario;
+
         }
 
         public Usuario UsuarioLogado  { get; }

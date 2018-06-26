@@ -103,6 +103,12 @@
     <Compile Include="cadastros\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadastros\SenhaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadastros\SenhaUsuario.Designer.cs">
+      <DependentUpon>SenhaUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="consultas\Consulta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <Compile Include="dados\Ligacao.cs" />
     <Compile Include="dados\LigacoesContext.cs" />
     <Compile Include="dados\OpcoesStatus.cs" />
+    <Compile Include="dados\password\HashWithSaltResult.cs" />
+    <Compile Include="dados\password\PasswordWithSaltHasher.cs" />
+    <Compile Include="dados\password\RNG.cs" />
     <Compile Include="dados\Status.cs" />
     <Compile Include="dados\TipoUsuario.cs" />
     <Compile Include="dados\Usuario.cs" />
@@ -135,6 +144,14 @@
     <Compile Include="Migrations\201806191434452_Initial.cs" />
     <Compile Include="Migrations\201806191434452_Initial.Designer.cs">
       <DependentUpon>201806191434452_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806261302434_Hash.cs" />
+    <Compile Include="Migrations\201806261302434_Hash.Designer.cs">
+      <DependentUpon>201806261302434_Hash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806261429527_Hash2.cs" />
+    <Compile Include="Migrations\201806261429527_Hash2.Designer.cs">
+      <DependentUpon>201806261429527_Hash2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -157,6 +174,9 @@
     <EmbeddedResource Include="cadastros\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="cadastros\SenhaUsuario.resx">
+      <DependentUpon>SenhaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="consultas\Consulta.resx">
       <DependentUpon>Consulta.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +188,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806191434452_Initial.resx">
       <DependentUpon>201806191434452_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806261302434_Hash.resx">
+      <DependentUpon>201806261302434_Hash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806261429527_Hash2.resx">
+      <DependentUpon>201806261429527_Hash2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

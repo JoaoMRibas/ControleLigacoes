@@ -54,7 +54,7 @@ namespace ControleLigacoes.cadastros
 
 
                 List<Usuario> usuarios = (from us in context.Usuarios
-                    where us.Login.Equals(LoginUsu.Text) && us.Senha.Equals(SenhaUsu.Text)
+                    where us.Login.Equals(LoginUsu.Text) && us.HashSenha.Equals(SenhaUsu.Text)
                     select us).ToList();
 
                 if (!usuarios.Any())
