@@ -55,12 +55,14 @@ namespace ControleLigacoes.cadastros
             if (CadUsuario == null)
             {
                 CadUsuario = new CadUsuario();
+                CadUsuario.UsuarioLogado = UsuarioLogado;
                 CadUsuario.ShowDialog();
             }
 
             else
             {
                 CadUsuario = CadUsuario;
+                CadUsuario.UsuarioLogado = UsuarioLogado;
                 CadUsuario.ShowDialog();
             }
 

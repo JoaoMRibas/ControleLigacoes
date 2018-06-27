@@ -20,5 +20,10 @@ namespace ControleLigacoes.dados.password
             byte[] digestBytes = hashAlgo.ComputeHash(passwordWithSaltBytes.ToArray());
             return new HashWithSaltResult(Convert.ToBase64String(saltBytes), Convert.ToBase64String(digestBytes));
         }
+
+        public HashWithSaltResult HashComSalt(string password, string HashWithSalt, HashAlgorithm hashAlgo)
+        {
+
+        }
     }
 }

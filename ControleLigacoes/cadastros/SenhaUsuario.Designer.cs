@@ -28,35 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.SenAntiga = new System.Windows.Forms.TextBox();
+            this.Senha = new System.Windows.Forms.TextBox();
+            this.ConfSenha = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnConfirmar = new System.Windows.Forms.Button();
+            this.BtnLimpar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // SenAntiga
             // 
-            this.textBox1.Location = new System.Drawing.Point(115, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.SenAntiga.Location = new System.Drawing.Point(115, 44);
+            this.SenAntiga.Name = "SenAntiga";
+            this.SenAntiga.Size = new System.Drawing.Size(100, 20);
+            this.SenAntiga.TabIndex = 0;
             // 
-            // textBox2
+            // Senha
             // 
-            this.textBox2.Location = new System.Drawing.Point(115, 79);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.Senha.Location = new System.Drawing.Point(115, 79);
+            this.Senha.Name = "Senha";
+            this.Senha.Size = new System.Drawing.Size(100, 20);
+            this.Senha.TabIndex = 1;
             // 
-            // textBox3
+            // ConfSenha
             // 
-            this.textBox3.Location = new System.Drawing.Point(115, 114);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 2;
+            this.ConfSenha.Location = new System.Drawing.Point(115, 114);
+            this.ConfSenha.Name = "ConfSenha";
+            this.ConfSenha.Size = new System.Drawing.Size(100, 20);
+            this.ConfSenha.TabIndex = 2;
             // 
             // label1
             // 
@@ -93,19 +94,31 @@
             this.BtnConfirmar.TabIndex = 6;
             this.BtnConfirmar.Text = "Confirmar";
             this.BtnConfirmar.UseVisualStyleBackColor = true;
+            this.BtnConfirmar.Click += new System.EventHandler(this.BtnConfirmar_Click);
+            // 
+            // BtnLimpar
+            // 
+            this.BtnLimpar.Location = new System.Drawing.Point(12, 149);
+            this.BtnLimpar.Name = "BtnLimpar";
+            this.BtnLimpar.Size = new System.Drawing.Size(87, 23);
+            this.BtnLimpar.TabIndex = 7;
+            this.BtnLimpar.Text = "Limpar";
+            this.BtnLimpar.UseVisualStyleBackColor = true;
+            this.BtnLimpar.Click += new System.EventHandler(this.BtnLimpar_Click);
             // 
             // SenhaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(256, 205);
+            this.Controls.Add(this.BtnLimpar);
             this.Controls.Add(this.BtnConfirmar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ConfSenha);
+            this.Controls.Add(this.Senha);
+            this.Controls.Add(this.SenAntiga);
             this.Name = "SenhaUsuario";
             this.Text = "SenhaUsuario";
             this.ResumeLayout(false);
@@ -115,12 +128,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox SenAntiga;
+        private System.Windows.Forms.TextBox Senha;
+        private System.Windows.Forms.TextBox ConfSenha;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnConfirmar;
+        private System.Windows.Forms.Button BtnLimpar;
     }
 }

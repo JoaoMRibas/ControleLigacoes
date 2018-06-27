@@ -34,7 +34,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.Nome = new System.Windows.Forms.TextBox();
             this.Login = new System.Windows.Forms.TextBox();
-            this.Senha = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Tipo = new System.Windows.Forms.ComboBox();
@@ -42,6 +41,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.Codigo = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -93,14 +93,6 @@
             this.Login.Name = "Login";
             this.Login.Size = new System.Drawing.Size(100, 20);
             this.Login.TabIndex = 5;
-            // 
-            // Senha
-            // 
-            this.Senha.Location = new System.Drawing.Point(49, 133);
-            this.Senha.Name = "Senha";
-            this.Senha.PasswordChar = '*';
-            this.Senha.Size = new System.Drawing.Size(100, 20);
-            this.Senha.TabIndex = 7;
             // 
             // button1
             // 
@@ -167,17 +159,27 @@
             this.Codigo.Size = new System.Drawing.Size(100, 20);
             this.Codigo.TabIndex = 1;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(46, 131);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(103, 23);
+            this.button4.TabIndex = 14;
+            this.button4.Text = "Abrir formulário ";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // CadUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(180, 302);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Tipo);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.Senha);
             this.Controls.Add(this.Login);
             this.Controls.Add(this.Nome);
             this.Controls.Add(this.label5);
@@ -200,7 +202,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox Nome;
         private System.Windows.Forms.TextBox Login;
-        private System.Windows.Forms.TextBox Senha;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox Tipo;
@@ -209,5 +210,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox Codigo;
+        private System.Windows.Forms.Button button4;
     }
 }

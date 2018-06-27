@@ -55,7 +55,6 @@ namespace ControleLigacoes.cadastros
             Codigo.Clear();
             Nome.Clear();
             Login.Clear();
-            Senha.Clear();
             Tipo.SelectedItem = null;
             UsuarioAtual = null;
 
@@ -108,10 +107,6 @@ namespace ControleLigacoes.cadastros
 
                 instancia.Nome = Nome.Text;
                 instancia.Login = Login.Text;
-                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-                HashWithSaltResult hashResultSha512 = pwHasher.HashWithSalt(Senha.Text, 64, SHA512.Create());
-                instancia.HashSenha = hashResultSha512.Digest;
-                instancia.HashSalt = hashResultSha512.Salt;
                 instancia.Tipo = tipo;
 
                 if (isInsert)
@@ -147,7 +142,6 @@ namespace ControleLigacoes.cadastros
                 arquivo.Write(Codigo.Text);
                 arquivo.Write(Nome.Text);
                 arquivo.Write(Login.Text);
-                arquivo.Write(Senha.Text);
                 arquivo.Write(Tipo.Text);
                 //Posiciono o ponteiro na próxima linha do arquivo.
                 arquivo.Write("\r\n");
@@ -217,7 +211,7 @@ namespace ControleLigacoes.cadastros
         }
 
         private Usuario UsuarioAtual { get; set; }
-
+        public Usuario UsuarioLogado { get; set; }
 
 
         public void Consulta_ItemSelecionado(Usuario obj)
@@ -226,7 +220,6 @@ namespace ControleLigacoes.cadastros
             Codigo.Text = obj.Codigo.ToString();
             Nome.Text = obj.Nome;
             Login.Text = obj.Login;
-            Senha.Text = obj.HashSenha;
             Tipo.SelectedItem = obj.Tipo;
 
         }
@@ -250,6 +243,36 @@ namespace ControleLigacoes.cadastros
                 }
                 LimparCampos();
             }
+        }
+        public SenhaUsuario SenhaUsuario { get; set; }
+
+        private void IniciaCadSenha()
+        {
+            if (SenhaUsuario == null)
+            {
+
+                SenhaUsuario = new SenhaUsuario();
+                SenhaUsuario.UsuarioLogado = UsuarioLogado;
+                SenhaUsuario.UsuarioAtual = UsuarioAtual;
+                SenhaUsuario.ShowDialog();
+
+            }
+
+            else
+            {
+
+                SenhaUsuario = SenhaUsuario;
+                SenhaUsuario.UsuarioLogado = UsuarioLogado;
+                SenhaUsuario.UsuarioAtual = UsuarioAtual;
+                SenhaUsuario.ShowDialog();
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            IniciaCadSenha();
+            
         }
     }
 }
