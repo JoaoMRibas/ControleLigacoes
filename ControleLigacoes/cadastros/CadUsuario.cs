@@ -78,7 +78,7 @@ namespace ControleLigacoes.cadastros
 
             if (!Enum.TryParse(Tipo.Text, out TipoUsuario tipo) || !Enum.IsDefined(typeof(TipoUsuario), tipo))
             {
-                MessageBox.Show("Não foi possível salvar a informação o campo informado não é válido");
+                MessageBox.Show("Não foi possível salvar a informação pois o tipo de usuário não foi selecionado");
                 return;
             }
 
@@ -96,6 +96,7 @@ namespace ControleLigacoes.cadastros
                     ? null
                     : context.Usuarios.FirstOrDefault(c => c.Id.Equals(UsuarioAtual.Id));
 
+                
                 bool isInsert = false;
                 
                 if (instancia == null)
@@ -103,9 +104,16 @@ namespace ControleLigacoes.cadastros
                     isInsert = true;
                     instancia = new Usuario();
                     instancia.Id = Guid.NewGuid();
+                    if (SenhaUsuario.HashWithSalt == null)
+                    {
+                        MessageBox.Show("Por favor crie uma senha.");
+                        return;
+                    }
                 }
-
+                
                 instancia.Nome = Nome.Text;
+                instancia.HashSenha = SenhaUsuario.HashWithSalt.Digest;
+                instancia.HashSalt = SenhaUsuario.HashWithSalt.Salt;
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
 
@@ -114,6 +122,7 @@ namespace ControleLigacoes.cadastros
                     context.Usuarios.Add(instancia);
 
                 }
+
 
                 context.SaveChanges();
             }
@@ -244,35 +253,21 @@ namespace ControleLigacoes.cadastros
                 LimparCampos();
             }
         }
-        public SenhaUsuario SenhaUsuario { get; set; }
+
+        private SenhaUsuario _senhaUsuario;
+
+        private SenhaUsuario SenhaUsuario => _senhaUsuario ?? (_senhaUsuario = new SenhaUsuario());
+
 
         private void IniciaCadSenha()
         {
-            if (SenhaUsuario == null)
-            {
-
-                SenhaUsuario = new SenhaUsuario();
-                SenhaUsuario.UsuarioLogado = UsuarioLogado;
-                SenhaUsuario.UsuarioAtual = UsuarioAtual;
-                SenhaUsuario.ShowDialog();
-
-            }
-
-            else
-            {
-
-                SenhaUsuario = SenhaUsuario;
-                SenhaUsuario.UsuarioLogado = UsuarioLogado;
-                SenhaUsuario.UsuarioAtual = UsuarioAtual;
-                SenhaUsuario.ShowDialog();
-            }
-
+            SenhaUsuario.UsuarioAtual = UsuarioAtual;
+            SenhaUsuario.Exibe();
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            IniciaCadSenha();
-            
+        {  
+            IniciaCadSenha();  
         }
     }
 }
