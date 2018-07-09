@@ -26,26 +26,27 @@ namespace ControleLigacoes.cadastros
         public void Exibe()
         {
             
-            if (HashWithSalt == null)
+            if (UsuarioAtual == null)
             {
-
-                SenAntiga.ReadOnly = true;
-                SenAntiga.Text = "Campo não necessário.";
+                
+                SenAtual.ReadOnly = true;
+                SenAtual.Text = "Campo não necessário.";
 
             }
             else
             {
-                SenAntiga.ReadOnly = false;
+                SenAtual.PasswordChar = '*';
+                SenAtual.ReadOnly = false;
             }
 
             ShowDialog();
         }
 
         private void EnviarInfor()
-        {
-            if (HashWithSalt == null)
+        {  
+            if (UsuarioAtual == null)
             {
-                if (!ConfSenha.Text.Equals(Senha.Text))
+                if (!ConfSenha.Text.Equals(SenhaNova.Text))
                 {
                     MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
                     return;
@@ -56,26 +57,26 @@ namespace ControleLigacoes.cadastros
 
             }
 
-            if (HashWithSalt != null)
+            if (UsuarioAtual != null)
             {
-                if (ConfSenha.Text == Senha.Text && SenAntiga.Text == UsuarioAtual.HashSenha)
+                if (ConfSenha.Text == SenhaNova.Text && SenAtual.Text == UsuarioAtual.HashSenha)
                 {
                     PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                     HashWithSalt = pwHasher.HashWithSalt(ConfSenha.Text, 64, SHA512.Create());
 
                 }
-                if(ConfSenha.Text != Senha.Text)
+                if(ConfSenha.Text != SenhaNova.Text)
                 {
                     MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
                     return;
                 }
 
-                if (SenAntiga.Text != UsuarioAtual.HashSenha)
+                if (SenAtual.Text != UsuarioAtual.HashSenha)
                 {
                     MessageBox.Show("A senha antiga não está correta");
                     return;
                 }
-
+                
             }
 
         }
@@ -90,10 +91,9 @@ namespace ControleLigacoes.cadastros
         }
         private void LimparCampos()
         {
-            Senha.Clear();
+            SenhaNova.Clear();
             ConfSenha.Clear();
-            SenAntiga.Clear();
-            HashWithSalt = null;
+            SenAtual.Clear();
 
         }
 

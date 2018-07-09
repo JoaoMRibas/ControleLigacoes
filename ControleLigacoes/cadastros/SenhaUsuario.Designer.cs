@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SenAntiga = new System.Windows.Forms.TextBox();
-            this.Senha = new System.Windows.Forms.TextBox();
+            this.SenAtual = new System.Windows.Forms.TextBox();
+            this.SenhaNova = new System.Windows.Forms.TextBox();
             this.ConfSenha = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,24 +38,26 @@
             this.BtnLimpar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // SenAntiga
+            // SenAtual
             // 
-            this.SenAntiga.Location = new System.Drawing.Point(115, 44);
-            this.SenAntiga.Name = "SenAntiga";
-            this.SenAntiga.Size = new System.Drawing.Size(100, 20);
-            this.SenAntiga.TabIndex = 0;
+            this.SenAtual.Location = new System.Drawing.Point(115, 44);
+            this.SenAtual.Name = "SenAtual";
+            this.SenAtual.Size = new System.Drawing.Size(100, 20);
+            this.SenAtual.TabIndex = 0;
             // 
-            // Senha
+            // SenhaNova
             // 
-            this.Senha.Location = new System.Drawing.Point(115, 79);
-            this.Senha.Name = "Senha";
-            this.Senha.Size = new System.Drawing.Size(100, 20);
-            this.Senha.TabIndex = 1;
+            this.SenhaNova.Location = new System.Drawing.Point(115, 79);
+            this.SenhaNova.Name = "SenhaNova";
+            this.SenhaNova.PasswordChar = '*';
+            this.SenhaNova.Size = new System.Drawing.Size(100, 20);
+            this.SenhaNova.TabIndex = 1;
             // 
             // ConfSenha
             // 
             this.ConfSenha.Location = new System.Drawing.Point(115, 114);
             this.ConfSenha.Name = "ConfSenha";
+            this.ConfSenha.PasswordChar = '*';
             this.ConfSenha.Size = new System.Drawing.Size(100, 20);
             this.ConfSenha.TabIndex = 2;
             // 
@@ -64,18 +66,18 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(23, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Senha Antiga:";
+            this.label1.Text = "Senha Atual:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(23, 82);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Senha:";
+            this.label2.Text = "Nova senha:";
             // 
             // label3
             // 
@@ -117,8 +119,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConfSenha);
-            this.Controls.Add(this.Senha);
-            this.Controls.Add(this.SenAntiga);
+            this.Controls.Add(this.SenhaNova);
+            this.Controls.Add(this.SenAtual);
             this.Name = "SenhaUsuario";
             this.Text = "SenhaUsuario";
             this.ResumeLayout(false);
@@ -128,9 +130,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox SenAntiga;
-        private System.Windows.Forms.TextBox Senha;
-        private System.Windows.Forms.TextBox ConfSenha;
+        public System.Windows.Forms.TextBox SenAtual;
+        private System.Windows.Forms.TextBox SenhaNova;
+        public System.Windows.Forms.TextBox ConfSenha;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -68,8 +68,7 @@ namespace ControleLigacoes.cadastros
         //Arquivo de escrita 
         public TextWriter arquivo;
         private Consulta<Usuario> _consulta;
-
-        
+        public HashWithSaltResult HashWithSalt { get; set; }
 
 
         public void EnviarInfo()
@@ -111,9 +110,10 @@ namespace ControleLigacoes.cadastros
                     }
                 }
                 
+                
                 instancia.Nome = Nome.Text;
                 instancia.HashSenha = SenhaUsuario.HashWithSalt.Digest;
-                instancia.HashSalt = SenhaUsuario.HashWithSalt.Salt;
+                instancia.HashSenha = SenhaUsuario.HashWithSalt.Salt;
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
 
@@ -221,18 +221,24 @@ namespace ControleLigacoes.cadastros
 
         private Usuario UsuarioAtual { get; set; }
         public Usuario UsuarioLogado { get; set; }
-
+        public Usuario Instancia { get; set; }
 
         public void Consulta_ItemSelecionado(Usuario obj)
         {
+            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+            HashWithSalt = pwHasher.HashWithSalt(obj.HashSenha, 64, SHA512.Create());
+            HashWithSaltResult hashWithSaltResult = new HashWithSaltResult(HashWithSalt.Salt, HashWithSalt.Digest);
             UsuarioAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
+            hashWithSaltResult.Digest = obj.HashSenha;
+            hashWithSaltResult.Salt = obj.HashSalt;
+            HashWithSalt = hashWithSaltResult;
             Nome.Text = obj.Nome;
             Login.Text = obj.Login;
             Tipo.SelectedItem = obj.Tipo;
 
         }
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             ConsultaUsuario.Exibe();   
@@ -262,7 +268,9 @@ namespace ControleLigacoes.cadastros
         private void IniciaCadSenha()
         {
             SenhaUsuario.UsuarioAtual = UsuarioAtual;
+            SenhaUsuario.HashWithSalt = HashWithSalt;
             SenhaUsuario.Exibe();
+            Instancia = SenhaUsuario.UsuarioAtual;
         }
 
         private void button4_Click(object sender, EventArgs e)
