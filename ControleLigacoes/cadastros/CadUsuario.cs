@@ -113,7 +113,7 @@ namespace ControleLigacoes.cadastros
                 
                 instancia.Nome = Nome.Text;
                 instancia.HashSenha = SenhaUsuario.HashWithSalt.Digest;
-                instancia.HashSenha = SenhaUsuario.HashWithSalt.Salt;
+                instancia.HashSalt = SenhaUsuario.HashWithSalt.Salt;
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
 
@@ -268,7 +268,6 @@ namespace ControleLigacoes.cadastros
         private void IniciaCadSenha()
         {
             SenhaUsuario.UsuarioAtual = UsuarioAtual;
-            SenhaUsuario.HashWithSalt = HashWithSalt;
             SenhaUsuario.Exibe();
             Instancia = SenhaUsuario.UsuarioAtual;
         }

@@ -16,7 +16,7 @@ namespace ControleLigacoes.dados.password
 
         public HashWithSaltResult HashWithSalt(string password, string salt, HashAlgorithm hashAlgo)
         {
-            byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
+            byte[] saltBytes = Convert.FromBase64String(salt);
             return HashWithSalt(password, saltBytes, hashAlgo);
         }
 

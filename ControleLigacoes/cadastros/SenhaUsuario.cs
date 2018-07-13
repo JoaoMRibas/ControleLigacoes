@@ -40,10 +40,12 @@ namespace ControleLigacoes.cadastros
             }
 
             ShowDialog();
+            
         }
 
         private void EnviarInfor()
-        {  
+        {
+            PasswordWithSaltHasher pwHasher;
             if (UsuarioAtual == null)
             {
                 if (!ConfSenha.Text.Equals(SenhaNova.Text))
@@ -52,32 +54,38 @@ namespace ControleLigacoes.cadastros
                     return;
                 }
 
-                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+                pwHasher = new PasswordWithSaltHasher();
                 HashWithSalt = pwHasher.HashWithSalt(ConfSenha.Text, 64, SHA512.Create());
-
+                return;
             }
 
-            if (UsuarioAtual != null)
+
+            if (string.IsNullOrWhiteSpace(SenhaNova.Text) || string.IsNullOrWhiteSpace(ConfSenha.Text))
             {
-                if (ConfSenha.Text == SenhaNova.Text && SenAtual.Text == UsuarioAtual.HashSenha)
-                {
-                    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-                    HashWithSalt = pwHasher.HashWithSalt(ConfSenha.Text, 64, SHA512.Create());
+                MessageBox.Show("As senhas digitadas nos campos senha ou confirmar não foram digitadas");
+                return;
 
-                }
-                if(ConfSenha.Text != SenhaNova.Text)
-                {
-                    MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
-                    return;
-                }
-
-                if (SenAtual.Text != UsuarioAtual.HashSenha)
-                {
-                    MessageBox.Show("A senha antiga não está correta");
-                    return;
-                }
-                
             }
+            if (!ConfSenha.Text.Equals(SenhaNova.Text))
+            {
+                MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
+                return;
+            }
+
+            pwHasher = new PasswordWithSaltHasher();
+            HashWithSalt = pwHasher.HashWithSalt(SenAtual.Text, UsuarioAtual.HashSalt, SHA512.Create());
+
+            if (!HashWithSalt.Digest.Equals(UsuarioAtual.HashSenha))
+
+            {
+
+                MessageBox.Show("A senha antiga não está correta");
+                return;
+            }
+            pwHasher= new PasswordWithSaltHasher();
+            HashWithSalt = pwHasher.HashWithSalt(ConfSenha.Text, 64, SHA512.Create());
+
+
 
         }
 
@@ -87,7 +95,6 @@ namespace ControleLigacoes.cadastros
             EnviarInfor();
             LimparCampos();
             Close();
-
         }
         private void LimparCampos()
         {
