@@ -112,8 +112,8 @@ namespace ControleLigacoes.cadastros
                 
                 
                 instancia.Nome = Nome.Text;
-                instancia.HashSenha = SenhaUsuario.HashWithSalt.Digest;
-                instancia.HashSalt = SenhaUsuario.HashWithSalt.Salt;
+                instancia.HashSenha = SenhaUsuarioExistente.HashWithSalt.Digest;
+                instancia.HashSalt = SenhaUsuarioExistente.HashWithSalt.Salt;
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
 
@@ -264,12 +264,34 @@ namespace ControleLigacoes.cadastros
 
         private SenhaUsuario SenhaUsuario => _senhaUsuario ?? (_senhaUsuario = new SenhaUsuario());
 
+        private SenhaUsuarioExistente _senhaUsuarioExistente;
+
+        private SenhaUsuarioExistente SenhaUsuarioExistente => _senhaUsuarioExistente ?? (_senhaUsuarioExistente = new SenhaUsuarioExistente());
+
 
         private void IniciaCadSenha()
         {
-            SenhaUsuario.UsuarioAtual = UsuarioAtual;
-            SenhaUsuario.Exibe();
-            Instancia = SenhaUsuario.UsuarioAtual;
+            SenhaUsuario.HashWithSalt = UsuarioAtual == null ? null : new HashWithSaltResult(UsuarioAtual.HashSalt, UsuarioAtual.HashSenha);
+            SenhaUsuarioExistente.HashWithSalt = UsuarioAtual == null ? null : new HashWithSaltResult(UsuarioAtual.HashSalt, UsuarioAtual.HashSenha);
+            if (UsuarioAtual == null)
+            {
+                SenhaUsuario.Exibe();
+            }
+            else
+            {
+                SenhaUsuarioExistente.Exibe();
+            }
+
+            if (UsuarioAtual == null)
+            {
+                return;
+            }
+
+            if (SenhaUsuario.HashWithSalt.Salt == null || SenhaUsuario.HashWithSalt.Digest == null)
+            {
+                return;
+            }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
