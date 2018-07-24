@@ -103,7 +103,7 @@ namespace ControleLigacoes.cadastros
                     isInsert = true;
                     instancia = new Usuario();
                     instancia.Id = Guid.NewGuid();
-                    if (SenhaUsuario.HashWithSalt == null)
+                    if (SenhaUsuario.Senha == null)
                     {
                         MessageBox.Show("Por favor crie uma senha.");
                         return;
@@ -112,8 +112,16 @@ namespace ControleLigacoes.cadastros
                 
                 
                 instancia.Nome = Nome.Text;
-                instancia.HashSenha = SenhaUsuarioExistente.HashWithSalt.Digest;
-                instancia.HashSalt = SenhaUsuarioExistente.HashWithSalt.Salt;
+                if (SenhaUsuario.HashWithSalt == null)
+                {
+                    instancia.HashSenha = SenhaUsuarioExistente.HashWithSalt.Digest;
+                    instancia.HashSalt = SenhaUsuarioExistente.HashWithSalt.Salt;
+                }
+                if (SenhaUsuarioExistente.HashWithSalt == null)
+                {
+                    instancia.HashSalt = SenhaUsuario.HashWithSalt.Digest;
+                    instancia.HashSenha = SenhaUsuario.HashWithSalt.Salt;
+                }
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
 
@@ -292,6 +300,14 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
+            //if (SenhaUsuarioExistente == null)
+            //{
+            //    HashWithSalt = SenhaUsuario.HashWithSalt;
+            //}
+            //if (SenhaUsuario == null)
+            //{
+            //    HashWithSalt = SenhaUsuarioExistente.HashWithSalt;
+            //}
         }
 
         private void button4_Click(object sender, EventArgs e)

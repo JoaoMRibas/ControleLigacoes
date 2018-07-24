@@ -54,7 +54,9 @@ namespace ControleLigacoes.cadastros
                 MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
                 return;
             }
-            ControleSenha.Instance.GerarNovaSenha(Senha.Text);
+
+            HashWithSaltResult hashWithSalt = ControleSenha.Instance.GerarNovaSenha(Senha.Text);
+            HashWithSalt = hashWithSalt;
             LimparCampos();
             Close();
              

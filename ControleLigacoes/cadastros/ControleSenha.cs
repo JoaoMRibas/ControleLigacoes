@@ -23,6 +23,7 @@ namespace ControleLigacoes.cadastros
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
             HashWithSaltResult hws = pwHasher.HashWithSalt(senhaInformada, hashWithSalt.Salt, HashAlgorithm);
             return hws.Digest.Equals(hashWithSalt.Digest);
+
         }
 
         public bool ValidarSenhas(string senhaInformada, string senhaConfirmacao)

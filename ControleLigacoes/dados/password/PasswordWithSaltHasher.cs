@@ -30,5 +30,6 @@ namespace ControleLigacoes.dados.password
             return new HashWithSaltResult(Convert.ToBase64String(saltBytes), Convert.ToBase64String(digestBytes));
 
         }
+
     }
 }

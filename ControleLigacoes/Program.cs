@@ -18,7 +18,7 @@ namespace ControleLigacoes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CadUsuario());
+            Application.Run(new Login());
             
         }
 

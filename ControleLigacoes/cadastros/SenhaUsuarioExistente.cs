@@ -49,13 +49,14 @@ namespace ControleLigacoes.cadastros
                 MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
                 return;
             }
-            if(!ControleSenha.Instance.ValidarSenhaAtual(HashWithSalt, SenAtual.Text))
+            if(ControleSenha.Instance.ValidarSenhaAtual(HashWithSalt, SenAtual.Text))
             {
                 MessageBox.Show("A senha atual não está correta");
                 return;
             }
 
-            ControleSenha.Instance.GerarNovaSenha(SenNova.Text);
+            HashWithSaltResult hashWithSalt = ControleSenha.Instance.GerarNovaSenha(SenNova.Text);
+            HashWithSalt = hashWithSalt;
             LimparCampos();
             Close();
 

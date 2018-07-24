@@ -1,4 +1,5 @@
 ﻿using ControleLigacoes.dados;
+using ControleLigacoes.dados.password;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +25,7 @@ namespace ControleLigacoes.cadastros
             SenhaUsu.KeyPress += SenhaUsu_KeyPress;
         }
 
+        public Usuario Usuario { get; set; }
 
         private void SenhaUsu_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -48,13 +51,19 @@ namespace ControleLigacoes.cadastros
         private void Logar()
         {
             Usuario usuario = null;
+           
 
             using (LigacoesContext context = new LigacoesContext())
             {
+                Usuario findUser = from us in context.Usuarios where us.Login.Equals(LoginUsu.Text) select us.Login.Equals(Usuario.Login);
+
+
+                    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+                    HashWithSaltResult hws = pwHasher.HashWithSalt(SenhaUsu.Text, findUser.Any<> , SHA512.Create());
 
 
                 List<Usuario> usuarios = (from us in context.Usuarios
-                    where us.Login.Equals(LoginUsu.Text) && us.HashSenha.Equals(SenhaUsu.Text)
+                    where us.Login.Equals(LoginUsu.Text) && us.HashSenha.Equals(hws)
                     select us).ToList();
 
                 if (!usuarios.Any())
