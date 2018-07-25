@@ -72,6 +72,7 @@
             this.Controls.Add(this.BtCadUsuario);
             this.Controls.Add(this.BtCadCliente);
             this.Name = "Menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             this.ResumeLayout(false);
 

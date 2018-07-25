@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ControleLigacoes.dados.password
 {
-    class PasswordWithSaltHasher
+    public class PasswordWithSaltHasher
     {
         public HashWithSaltResult HashWithSalt(string password, int saltLength, HashAlgorithm hashAlgo)
         {

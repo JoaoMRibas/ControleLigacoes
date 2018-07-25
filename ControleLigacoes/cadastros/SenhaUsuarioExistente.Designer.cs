@@ -61,6 +61,7 @@
             // 
             this.SenAtual.Location = new System.Drawing.Point(96, 52);
             this.SenAtual.Name = "SenAtual";
+            this.SenAtual.PasswordChar = '*';
             this.SenAtual.Size = new System.Drawing.Size(85, 20);
             this.SenAtual.TabIndex = 2;
             // 
@@ -95,6 +96,7 @@
             // 
             this.SenNova.Location = new System.Drawing.Point(96, 91);
             this.SenNova.Name = "SenNova";
+            this.SenNova.PasswordChar = '*';
             this.SenNova.Size = new System.Drawing.Size(88, 20);
             this.SenNova.TabIndex = 6;
             // 
@@ -102,6 +104,7 @@
             // 
             this.ConfSenha.Location = new System.Drawing.Point(96, 130);
             this.ConfSenha.Name = "ConfSenha";
+            this.ConfSenha.PasswordChar = '*';
             this.ConfSenha.Size = new System.Drawing.Size(88, 20);
             this.ConfSenha.TabIndex = 7;
             // 
@@ -119,6 +122,7 @@
             this.Controls.Add(this.BtnConfirmar);
             this.Controls.Add(this.BtnLimpar);
             this.Name = "SenhaUsuarioExistente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SenhaUsuarioExistente";
             this.ResumeLayout(false);
             this.PerformLayout();

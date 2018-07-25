@@ -18,6 +18,16 @@ namespace ControleLigacoes.cadastros
         public SenhaUsuarioExistente()
         {
             InitializeComponent();
+            Inicializa();
+        }
+        public void Inicializa()
+        {
+            FormClosed += SenhaUsuarioExistent_FormClosed;
+        }
+
+        private void SenhaUsuarioExistent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LimparCampos();
         }
 
         public HashWithSaltResult HashWithSalt { get; set; }
@@ -49,7 +59,7 @@ namespace ControleLigacoes.cadastros
                 MessageBox.Show("As senhas digitadas nos campos senha e confirmar senha devem ser iguais.");
                 return;
             }
-            if(ControleSenha.Instance.ValidarSenhaAtual(HashWithSalt, SenAtual.Text))
+            if(!ControleSenha.Instance.ValidarSenhaAtual(HashWithSalt, SenAtual.Text))
             {
                 MessageBox.Show("A senha atual não está correta");
                 return;

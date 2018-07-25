@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using ControleLigacoes.cadastros;
 using ControleLigacoes.dados;
+using ControleLigacoes.dados.password;
 using Menu = ControleLigacoes.cadastros.Menu;
 
 namespace ControleLigacoes
@@ -19,7 +21,6 @@ namespace ControleLigacoes
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
-            
         }
 
 

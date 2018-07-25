@@ -25,7 +25,7 @@ namespace ControleLigacoes.cadastros
             SenhaUsu.KeyPress += SenhaUsu_KeyPress;
         }
 
-        public Usuario Usuario { get; set; }
+        public List<Usuario>Usuario { get; set; }
 
         private void SenhaUsu_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -47,6 +47,10 @@ namespace ControleLigacoes.cadastros
             }
 
         }
+        void menu_Disposed(object sender, EventArgs e)
+        {
+            Close();
+        }
 
         private void Logar()
         {
@@ -55,38 +59,29 @@ namespace ControleLigacoes.cadastros
 
             using (LigacoesContext context = new LigacoesContext())
             {
-                Usuario findUser = from us in context.Usuarios where us.Login.Equals(LoginUsu.Text) select us.Login.Equals(Usuario.Login);
-
-
-                    PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-                    HashWithSaltResult hws = pwHasher.HashWithSalt(SenhaUsu.Text, findUser.Any<> , SHA512.Create());
-
 
                 List<Usuario> usuarios = (from us in context.Usuarios
-                    where us.Login.Equals(LoginUsu.Text) && us.HashSenha.Equals(hws)
+                    where us.Login.Equals(LoginUsu.Text)
                     select us).ToList();
 
-                if (!usuarios.Any())
+                usuario = usuarios.FirstOrDefault();
+                if(usuario == null || !ControleSenha.Instance.ValidarSenhaAtual(usuario.HashSalt, usuario.HashSenha, SenhaUsu.Text))
                 {
                     MessageBox.Show("Senha ou nome de usuário estão errados, por favor tente novamente");
                     return;
                 }
 
-                if (usuarios.Count > 1)
-                {
-                    MessageBox.Show("Erro, mais de 1 usuário selecionado, reinicie o programa");
-                    return;
-                }
-
-                usuario = usuarios.FirstOrDefault();
 
             }
 
             LoginUsu.Clear();
             SenhaUsu.Clear();
+            Hide();
             Menu menu = new Menu(usuario);
-            menu.ShowDialog();
+            menu.Disposed += menu_Disposed;
+            menu.Show();
             
+
         }
 
 

@@ -39,7 +39,6 @@
             this.BtLimpar = new System.Windows.Forms.Button();
             this.BtSalvar = new System.Windows.Forms.Button();
             this.BtPesquisar = new System.Windows.Forms.Button();
-            this.BtExcluir = new System.Windows.Forms.Button();
             this.BtCliente = new System.Windows.Forms.Button();
             this.DtGvStatus = new System.Windows.Forms.DataGridView();
             this.Ligacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -148,16 +147,6 @@
             this.BtPesquisar.UseVisualStyleBackColor = true;
             this.BtPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
-            // BtExcluir
-            // 
-            this.BtExcluir.Location = new System.Drawing.Point(131, 242);
-            this.BtExcluir.Name = "BtExcluir";
-            this.BtExcluir.Size = new System.Drawing.Size(88, 22);
-            this.BtExcluir.TabIndex = 13;
-            this.BtExcluir.Text = "Excluir ";
-            this.BtExcluir.UseVisualStyleBackColor = true;
-            this.BtExcluir.Click += new System.EventHandler(this.BtExcluir_Click);
-            // 
             // BtCliente
             // 
             this.BtCliente.Location = new System.Drawing.Point(189, 79);
@@ -203,7 +192,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 142);
+            this.button1.Location = new System.Drawing.Point(12, 150);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 23);
             this.button1.TabIndex = 9;
@@ -220,7 +209,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DtGvStatus);
             this.Controls.Add(this.BtCliente);
-            this.Controls.Add(this.BtExcluir);
             this.Controls.Add(this.BtPesquisar);
             this.Controls.Add(this.BtSalvar);
             this.Controls.Add(this.BtLimpar);
@@ -233,6 +221,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CadLigacao";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadLigacao";
             ((System.ComponentModel.ISupportInitialize)(this.DtGvStatus)).EndInit();
             this.ResumeLayout(false);
@@ -253,7 +242,6 @@
         private System.Windows.Forms.Button BtLimpar;
         private System.Windows.Forms.Button BtSalvar;
         private System.Windows.Forms.Button BtPesquisar;
-        private System.Windows.Forms.Button BtExcluir;
         private System.Windows.Forms.Button BtCliente;
         private System.Windows.Forms.DataGridView DtGvStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ligacao;

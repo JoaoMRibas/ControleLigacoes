@@ -69,6 +69,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OpcaoStatus);
             this.Name = "CadStatus";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CadStatus";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -70,10 +70,18 @@ namespace ControleLigacoes.cadastros
             }
 
             Cliente.KeyPress += Cliente_KeyPress;
-
+            Inicializa();
         }
 
-        
+        public void Inicializa()
+        {
+            FormClosed += CadLigacao_FormClosed;
+        }
+
+        private void CadLigacao_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LimparCampos();
+        }
 
         public Menu Menu { get; set; }
         

@@ -18,11 +18,20 @@ namespace ControleLigacoes.cadastros
         public SenhaUsuario()
         {
             InitializeComponent();
-            
+            Inicializa();
         }
 
         public HashWithSaltResult HashWithSalt { get; set; }
-         
+        public void Inicializa()
+        {
+            FormClosed += SenhaUsuario_FormClosed;
+
+        }
+
+        private void SenhaUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LimparCampos();
+        }
 
         public void Exibe()
 

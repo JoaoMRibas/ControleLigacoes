@@ -102,6 +102,7 @@
             this.Controls.Add(this.ConfSenha);
             this.Controls.Add(this.Senha);
             this.Name = "SenhaUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SenhaUsuario";
             this.ResumeLayout(false);
             this.PerformLayout();

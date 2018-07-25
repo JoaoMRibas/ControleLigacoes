@@ -21,9 +21,21 @@ namespace ControleLigacoes.cadastros
         public CadCliente()
         {
             InitializeComponent();
+            Inicializa();
         }
 
         public Menu Menu { get; set; }
+
+        public void Inicializa()
+        {
+            FormClosed += CadCliente_FormClosed;
+
+        }
+
+        private void CadCliente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Limpar();
+        }
 
         private void Limpar()
         {

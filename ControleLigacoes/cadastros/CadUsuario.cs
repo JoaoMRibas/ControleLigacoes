@@ -31,6 +31,7 @@ namespace ControleLigacoes.cadastros
 
         public void Inicializa()
         {
+            FormClosed += CadUsuario_FormClosed; 
 
             foreach (TipoUsuario novotipo in Enum.GetValues(typeof(TipoUsuario)).OfType<TipoUsuario>())
             {
@@ -41,6 +42,11 @@ namespace ControleLigacoes.cadastros
 
                 Tipo.Items.Add(novotipo);
             }
+        }
+
+        private void CadUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LimparCampos();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,16 +120,22 @@ namespace ControleLigacoes.cadastros
                 instancia.Nome = Nome.Text;
                 if (SenhaUsuario.HashWithSalt == null)
                 {
-                    instancia.HashSenha = SenhaUsuarioExistente.HashWithSalt.Digest;
                     instancia.HashSalt = SenhaUsuarioExistente.HashWithSalt.Salt;
+                    instancia.HashSenha = SenhaUsuarioExistente.HashWithSalt.Digest;                    
                 }
-                if (SenhaUsuarioExistente.HashWithSalt == null)
+                else
                 {
-                    instancia.HashSalt = SenhaUsuario.HashWithSalt.Digest;
-                    instancia.HashSenha = SenhaUsuario.HashWithSalt.Salt;
+                    instancia.HashSalt = SenhaUsuario.HashWithSalt.Salt;
+                    instancia.HashSenha = SenhaUsuario.HashWithSalt.Digest;
                 }
                 instancia.Login = Login.Text;
                 instancia.Tipo = tipo;
+                List<Usuario> user = (from us in context.Usuarios where us.Login.Equals(instancia.Login) select us).ToList();
+                if (user.Any())
+                {
+                    MessageBox.Show("O login digitado já existe, por favor crie outro");
+                    return;
+                }
 
                 if (isInsert)
                 {

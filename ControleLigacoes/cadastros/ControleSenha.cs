@@ -16,12 +16,19 @@ namespace ControleLigacoes.cadastros
         public static ControleSenha Instance => _instance ?? (_instance = new ControleSenha());
 
         private int SaltLength => 64;
-        private HashAlgorithm HashAlgorithm => _hashAlgorithm ?? (_hashAlgorithm = SHA512.Create()); 
+        private HashAlgorithm HashAlgorithm => _hashAlgorithm ?? (_hashAlgorithm = SHA512.Create());
+
+        public bool ValidarSenhaAtual(string hashSalt,string hashDigest, string senhaInformada)
+        {
+            HashWithSaltResult hashWithSalt = new HashWithSaltResult(hashSalt, hashDigest);
+            return ValidarSenhaAtual(hashWithSalt, senhaInformada);
+            
+        }
 
         public bool ValidarSenhaAtual(HashWithSaltResult hashWithSalt, string senhaInformada)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            HashWithSaltResult hws = pwHasher.HashWithSalt(senhaInformada, hashWithSalt.Salt, HashAlgorithm);
+            HashWithSaltResult hws = pwHasher.HashWithSalt(senhaInformada, hashWithSalt.Salt, SHA512.Create());
             return hws.Digest.Equals(hashWithSalt.Digest);
 
         }
@@ -34,7 +41,7 @@ namespace ControleLigacoes.cadastros
         public HashWithSaltResult GerarNovaSenha(string senhaInformada)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            return pwHasher.HashWithSalt(senhaInformada, SaltLength, HashAlgorithm);
+            return pwHasher.HashWithSalt(senhaInformada, SaltLength, SHA512.Create());
         }
         
     }
