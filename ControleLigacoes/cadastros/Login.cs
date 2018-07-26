@@ -2,14 +2,7 @@
 using ControleLigacoes.dados.password;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -54,7 +47,7 @@ namespace ControleLigacoes.cadastros
 
         private void Logar()
         {
-            Usuario usuario = null;
+            Usuario usuario;
            
 
             using (LigacoesContext context = new LigacoesContext())

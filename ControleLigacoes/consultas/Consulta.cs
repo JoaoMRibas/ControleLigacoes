@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using ControleLigacoes.dados;
@@ -139,9 +138,9 @@ namespace ControleLigacoes.consultas
             }
         }
 
-        private Func<T,object[]> CreateCells { get; set; }
+        private Func<T,object[]> CreateCells { get; }
 
-        private Func<List<T>> Carregar { get; set; }
+        private Func<List<T>> Carregar { get; }
 
         private void DataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using ControleLigacoes.dados.password;
-using ControleLigacoes.dados;
 
 namespace ControleLigacoes.cadastros
 {
@@ -72,7 +63,7 @@ namespace ControleLigacoes.cadastros
 
         }
 
-        private void BtnLimpar_Click(object sender, EventArgs e)
+        private void BtnLimpar_Click_1(object sender, EventArgs e)
         {
             LimparCampos();
         }

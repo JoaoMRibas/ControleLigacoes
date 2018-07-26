@@ -1,7 +1,6 @@
 ﻿using System.Security.Cryptography;
-using ControleLigacoes.dados.password;
 
-namespace ControleLigacoes.cadastros
+namespace ControleLigacoes.dados.password
 {
     public class ControleSenha
     {
@@ -28,7 +27,7 @@ namespace ControleLigacoes.cadastros
         public bool ValidarSenhaAtual(HashWithSaltResult hashWithSalt, string senhaInformada)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            HashWithSaltResult hws = pwHasher.HashWithSalt(senhaInformada, hashWithSalt.Salt, SHA512.Create());
+            HashWithSaltResult hws = pwHasher.HashWithSalt(senhaInformada, hashWithSalt.Salt, HashAlgorithm);
             return hws.Digest.Equals(hashWithSalt.Digest);
 
         }
@@ -41,7 +40,7 @@ namespace ControleLigacoes.cadastros
         public HashWithSaltResult GerarNovaSenha(string senhaInformada)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            return pwHasher.HashWithSalt(senhaInformada, SaltLength, SHA512.Create());
+            return pwHasher.HashWithSalt(senhaInformada, SaltLength, HashAlgorithm);
         }
         
     }

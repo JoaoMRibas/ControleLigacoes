@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
@@ -18,7 +12,6 @@ namespace ControleLigacoes.cadastros
 
     public partial class CadLigacao : Form
     {
-        private HistoricoStatus Historico { get; set; }
 
         public CadLigacao()
         {
@@ -33,41 +26,36 @@ namespace ControleLigacoes.cadastros
             DtGvStatus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DtGvStatus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
-            if (typeof(HistoricoStatus) == typeof(HistoricoStatus))
+            CreateCells = obj =>
             {
 
-                CreateCells = obj =>
+                HistoricoStatus historicoStatus = obj;
+
+                if (historicoStatus == null)
+                {
+                    return null;
+
+                }
+
+                return new object[]
                 {
 
-                    HistoricoStatus historicoStatus = obj as HistoricoStatus;
-
-                    if (historicoStatus == null)
-                    {
-                        return null;
-
-                    }
-
-                    return new object[]
-                    {
-                        
-                        historicoStatus.Ligacao.Codigo, historicoStatus.Usuario.Nome, historicoStatus.DataHora,
-                        historicoStatus.Status
-                    };
+                    historicoStatus.Ligacao.Codigo, historicoStatus.Usuario.Nome, historicoStatus.DataHora,
+                    historicoStatus.Status
                 };
-                Carregar = () => 
+            };
+            Carregar = () =>
+            {
+                using (LigacoesContext context = new LigacoesContext())
                 {
-                    using (LigacoesContext context = new LigacoesContext())
-                    {
 
-                        List<HistoricoStatus> list = (from hs in context.HistoricosStatus
+                    List<HistoricoStatus> list = (from hs in context.HistoricosStatus
                             where LigacaoAtual.Id.Equals(hs.Ligacao.Id)
                             select hs).Include(nameof(HistoricoStatus.Usuario))
-                            .Include(nameof(HistoricoStatus.Ligacao)).ToList();
-                        return list;
-                    }
-                };
-
-            }
+                        .Include(nameof(HistoricoStatus.Ligacao)).ToList();
+                    return list;
+                }
+            };
 
             Cliente.KeyPress += Cliente_KeyPress;
             Inicializa();
@@ -82,10 +70,6 @@ namespace ControleLigacoes.cadastros
         {
             LimparCampos();
         }
-
-        public Menu Menu { get; set; }
-        
-
 
         public void LimparCampos()
         {
@@ -103,17 +87,10 @@ namespace ControleLigacoes.cadastros
             LimparCampos();
         }
 
-        //Irá armazenar o diretório recebido pelo folderDialog
-        public string diretorio = "C:\\Users\\user\\Desktop\\Teste";
-
-        //Arquivo de escrita 
-        public TextWriter arquivo;
         private Consulta<Ligacao> _consultaLigacao;
-        private Consulta<Usuario> _consultaUsuario;
         private Consulta<Cliente> _consultaCliente;
 
-
-        public void EnviarInfo()
+        public void Salvar()
         {
             
 
@@ -129,8 +106,7 @@ namespace ControleLigacoes.cadastros
                 if (instancia == null)
                 {
                     isInsert = true;
-                    instancia = new Ligacao();
-                    instancia.Id = Guid.NewGuid();
+                    instancia = new Ligacao {Id = Guid.NewGuid()};
 
                 }
 
@@ -217,17 +193,14 @@ namespace ControleLigacoes.cadastros
 
         public void ConsultaLigacaoItemSelecionado(Ligacao obj)
         {
-;
             LigacaoAtual = obj;
             Codigo.Text = obj.Codigo.ToString();
-            DataHora.Text = obj.DataHora.ToString();
+            DataHora.Text = obj.DataHora.ToString("HH:mm:ss dd/MM/yyyy");
             Cliente.Text = obj.Cliente.RazaoSocial;
             Cliente.Tag = obj.Cliente;         
             Observacoes.Text = obj.Observacoes;
             CarregarDados();
- 
         }
-
 
         public Ligacao LigacaoAtual { get; set; }
         public Usuario UsuarioLogado { get; set; }
@@ -246,28 +219,11 @@ namespace ControleLigacoes.cadastros
 
         private void BtSalvar_Click(object sender, EventArgs e)
         {
-            EnviarInfo();
+            Salvar();
         }
 
-        private void BtExcluir_Click(object sender, EventArgs e)
-        {
-            if (LigacaoAtual != null)
-            {
-                using (LigacoesContext context = new LigacoesContext())
-                {
-
-                    context.Ligacoes.Attach(LigacaoAtual);
-                    context.Ligacoes.Remove(LigacaoAtual);
-                    context.SaveChanges();
-
-                }
-                LimparCampos();
-            }
-        }
-
-        private Func<HistoricoStatus, object[]> CreateCells { get; set; }
-        private Func<List<HistoricoStatus>> Carregar { get; set; }
-
+        private Func<HistoricoStatus, object[]> CreateCells { get; }
+        private Func<List<HistoricoStatus>> Carregar { get; }
 
         public void CarregarDados()
         {
@@ -287,9 +243,11 @@ namespace ControleLigacoes.cadastros
         private void BtStatus_Click(object sender, EventArgs e)
         {
 
-            CadStatus status = new CadStatus();
-            status.UsuarioLogado = UsuarioLogado;
-            status.LigacaoHist = LigacaoAtual;
+            CadStatus status = new CadStatus
+            {
+                UsuarioLogado = UsuarioLogado,
+                LigacaoHist = LigacaoAtual
+            };
             status.ShowDialog();
             if (status.LigacaoHist == null)
             {

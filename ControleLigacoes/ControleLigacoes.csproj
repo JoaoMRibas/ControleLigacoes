@@ -11,6 +11,27 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>R:\Sisprodan\Testes\ControleLigacoes\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\192.168.10.200\dados12\Sisprodan\Testes\ControleLigacoes\</InstallUrl>
+    <TargetCulture>pt-BR</TargetCulture>
+    <ProductName>Controle de Ligações</ProductName>
+    <PublisherName>Prodan</PublisherName>
+    <SuiteName>ControleLigacoes</SuiteName>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +51,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>28E5A79C7516B887ECCEFEA4A84FF37530AB1D3F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ControleLigacoes_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -91,7 +124,7 @@
     <Compile Include="cadastros\CadUsuario.Designer.cs">
       <DependentUpon>CadUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="cadastros\ControleSenha.cs" />
+    <Compile Include="dados\password\ControleSenha.cs" />
     <Compile Include="cadastros\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,13 +155,6 @@
     <Compile Include="consultas\Consulta.Designer.cs">
       <DependentUpon>Consulta.cs</DependentUpon>
     </Compile>
-    <Compile Include="consultas\ConsultaUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="consultas\ConsultaUsuario.Designer.cs">
-      <DependentUpon>ConsultaUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dados\FileNames.cs" />
     <Compile Include="dados\HistoricoStatus.cs" />
     <Compile Include="dados\Ligacao.cs" />
     <Compile Include="dados\LigacoesContext.cs" />
@@ -141,13 +167,6 @@
     <Compile Include="dados\Usuario.cs" />
     <Compile Include="dados\Cliente.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LigacaoAtual\Assembly.cs" />
     <Compile Include="Migrations\201806191434452_Initial.cs" />
     <Compile Include="Migrations\201806191434452_Initial.Designer.cs">
       <DependentUpon>201806191434452_Initial.cs</DependentUpon>
@@ -190,12 +209,6 @@
     <EmbeddedResource Include="consultas\Consulta.resx">
       <DependentUpon>Consulta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="consultas\ConsultaUsuario.resx">
-      <DependentUpon>ConsultaUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806191434452_Initial.resx">
       <DependentUpon>201806191434452_Initial.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +228,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ControleLigacoes_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -231,6 +245,22 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Target Name="RemoveNetFxForceConflicts" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(FileName)' == 'netfx.force.conflicts'" />
+    </ItemGroup>
+  </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

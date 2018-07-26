@@ -1,14 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using ControleLigacoes.dados;
+using System.Diagnostics;
 using Newtonsoft.Json;
 
 namespace ControleLigacoes
 {
     public static class Extensions
     {
+        static Extensions()
+        {
+            SetDebug();
+        }
+
+        /// <summary>
+        /// Define se a versão atual é uma versão de Debug
+        /// </summary>
+        public static bool EhDebug { get; private set; }
+
+        [Conditional("DEBUG")]
+        private static void SetDebug()
+        {
+            EhDebug = true;
+        }
+
         #region Json
 
         /// <summary>

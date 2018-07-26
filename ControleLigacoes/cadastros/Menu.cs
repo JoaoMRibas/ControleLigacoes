@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ControleLigacoes.cadastros;
-using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
-using ControleLigacoes.dados.password;
 
 namespace ControleLigacoes.cadastros
 {
@@ -54,8 +43,7 @@ namespace ControleLigacoes.cadastros
             
             if (CadUsuario == null)
             {
-                CadUsuario = new CadUsuario();
-                CadUsuario.UsuarioLogado = UsuarioLogado;
+                CadUsuario = new CadUsuario {UsuarioLogado = UsuarioLogado};
                 CadUsuario.ShowDialog();
             }
 
@@ -74,9 +62,8 @@ namespace ControleLigacoes.cadastros
         {
             if (CadLigacao == null)
             {
-                
-                CadLigacao = new CadLigacao();
-                CadLigacao.UsuarioLogado = UsuarioLogado;
+
+                CadLigacao = new CadLigacao {UsuarioLogado = UsuarioLogado};
                 CadLigacao.ShowDialog();
 
             }

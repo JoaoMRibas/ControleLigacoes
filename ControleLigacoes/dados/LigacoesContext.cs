@@ -4,7 +4,7 @@ namespace ControleLigacoes.dados
 {
     public class LigacoesContext : DbContext
     {
-        public LigacoesContext() : base(nameOrConnectionString: "Postgres")
+        public LigacoesContext() : base(nameOrConnectionString: Extensions.EhDebug ? "Postgres_Debug" : "Postgres_Release")
         {
             //Configuration.LazyLoadingEnabled = false;
         }
@@ -14,7 +14,8 @@ namespace ControleLigacoes.dados
             modelBuilder.HasDefaultSchema("public");
             base.OnModelCreating(modelBuilder);
         }
-        
+
+
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }

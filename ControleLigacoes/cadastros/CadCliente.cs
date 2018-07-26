@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
-using Maoli;
 
 namespace ControleLigacoes.cadastros
 {
@@ -23,8 +13,6 @@ namespace ControleLigacoes.cadastros
             InitializeComponent();
             Inicializa();
         }
-
-        public Menu Menu { get; set; }
 
         public void Inicializa()
         {
@@ -53,17 +41,9 @@ namespace ControleLigacoes.cadastros
             Limpar();
         }
 
-        public FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-
-        //Irá armazenar o diretório recebido pelo folderDialog
-        public string diretorio = "C:\\Users\\user\\Desktop\\Teste";
-
-        //Arquivo de escrita 
-        public TextWriter arquivo;
         private Consulta<Cliente> _consulta;
 
-
-        private void EnviarInfoCliente()
+        private void Salvar()
         {
 
 
@@ -99,8 +79,7 @@ namespace ControleLigacoes.cadastros
                 if (instancia == null)
                 {
                     isInsert = true;
-                    instancia = new Cliente();
-                    instancia.Id = Guid.NewGuid();
+                    instancia = new Cliente {Id = Guid.NewGuid()};
                 }
 
                 instancia.RazaoSocial = RazaoSocial.Text;
@@ -122,28 +101,6 @@ namespace ControleLigacoes.cadastros
                 Limpar();
 
             }
-        }
-
-        public void interfaceUsuario()
-        {
-
-            // titulo a caixa de diágolo do browser que será aberta
-            folderDialog.Description = "Selecione o Diretório a ser pesquisado:";
-
-            //Indica o diretório raiz, a partir de onde a caixa de diálogo começará 
-            //a exibição dos demais diretórios.
-            folderDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-
-            // elimina a condição de criar uma nova pasta ao abrir a caixa
-            // de diálogo do browser
-            folderDialog.ShowNewFolderButton = false;
-
-            if (folderDialog.ShowDialog(this) != DialogResult.Cancel)
-            {
-                //Recupero o diretório da base de dados e o salvo na variavel diretorio
-                diretorio = folderDialog.SelectedPath;
-            }
-
         }
 
         private Consulta<Cliente> Consultaa
@@ -181,7 +138,7 @@ namespace ControleLigacoes.cadastros
         private void button2_Click(object sender, EventArgs e)
         {
            
-            EnviarInfoCliente();
+            Salvar();
             
         }
 
@@ -190,20 +147,5 @@ namespace ControleLigacoes.cadastros
             Consultaa.Exibe();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (ClienteAtual != null)
-            {
-                using (LigacoesContext context = new LigacoesContext())
-                {
-
-                    context.Clientes.Attach(ClienteAtual);
-                    context.Clientes.Remove(ClienteAtual);
-                    context.SaveChanges();
-
-                }
-                Limpar();
-            }
-        }
     }
 }

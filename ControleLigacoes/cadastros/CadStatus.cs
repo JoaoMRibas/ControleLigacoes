@@ -1,35 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ControleLigacoes.consultas;
 using ControleLigacoes.dados;
 
 namespace ControleLigacoes.cadastros
 {
     public partial class CadStatus : Form
     {
-        private Consulta<Usuario> _consultaUsuario;
         public Ligacao LigacaoHist { get; set; }
         public Usuario UsuarioLogado { get; set; }
 
-        
-        private CadUsuario _consulta;
         public CadStatus()
         {
             InitializeComponent();
             Inicializa();    
         }
-
-        public Menu Menu { get; set; }
 
         public void Inicializa()
         {
@@ -51,10 +36,9 @@ namespace ControleLigacoes.cadastros
 
         
 
-        public void EnviarInfo()
+        public void Salvar()
         {
-
-            
+ 
             if (!Enum.TryParse(OpcaoStatus.Text, out OpcoesStatus opcao) ||
                 !Enum.IsDefined(typeof(OpcoesStatus), opcao))
             {
@@ -62,11 +46,8 @@ namespace ControleLigacoes.cadastros
                 return;
             }
 
-            HistoricoStatus instancia = new HistoricoStatus();
+            HistoricoStatus instancia = new HistoricoStatus {Status = opcao};
 
-            
-            instancia.Status = opcao;
-            
             using (LigacoesContext context = new LigacoesContext())
             {
                 instancia.Id = Guid.NewGuid();
@@ -104,7 +85,7 @@ namespace ControleLigacoes.cadastros
  
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            EnviarInfo();
+            Salvar();
         }
         
     }
